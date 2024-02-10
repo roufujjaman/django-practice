@@ -1,0 +1,26 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.tasks {
+    width: 50%;
+    margin: auto;
+    margin-top: 1em;
+
+    background-color: rgb(241, 241, 241);
+}
+
+li {
+    color: rgb(63, 63, 63);
+    text-indent: 2em;
+    list-style: none;
+    padding-bottom: 1rem;
+}
+
+h3 {
+    background-color: rgb(199, 199, 199);
+    margin-bottom: 1rem;
+    padding: .5rem;
+}

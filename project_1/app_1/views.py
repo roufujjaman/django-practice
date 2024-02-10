@@ -5,5 +5,5 @@ import datetime
 def home(request):
     now = datetime.datetime.now()
     return render(request, 'app_1/body.html', {
-        "newyear": True
+        "newyear": now.month == 1 and now.day == 1
     })
