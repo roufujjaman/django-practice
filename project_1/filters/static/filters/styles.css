@@ -1,0 +1,14 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+
+
+    color: rgb(36, 0, 70);
+    text-align: center;
+}
+
+h1 {
+    width: 80%;
+    background-color: rgb(212, 212, 255);
+    margin: auto;
+    margin-bottom: 0.5rem;
+}

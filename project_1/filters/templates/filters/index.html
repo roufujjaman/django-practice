@@ -1,0 +1,9 @@
+{% extends "filters/layout.html" %}
+
+{% block body %}
+    <h1>{{ arr | join:"" }}</h1>
+    <h1>{{ today }}</h1>
+    <h1>{{ today | date:"D d M Y"}}</h1>
+    <h1>{{ today | date}}</h1>
+    <h1>{{ emptyArr | default:"empty array" }}</h1>
+{% endblock %}
