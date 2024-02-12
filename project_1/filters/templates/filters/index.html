@@ -1,4 +1,5 @@
 {% extends "filters/layout.html" %}
+{% load static %}
 
 {% block body %}
     <h1>{{ arr | join:"" }}</h1>
@@ -6,4 +7,7 @@
     <h1>{{ today | date:"D d M Y"}}</h1>
     <h1>{{ today | date}}</h1>
     <h1>{{ emptyArr | default:"empty array" }}</h1>
+    <h1>{{ players | dictsortreversed:"age" | join:"<br>" }}</h1>
+    <img src="{% static 'filters/img1.jpg' %}" alt="">
+    <h1>{{ players | dictsortreversed:"age" | join:"<br>" }}</h1>
 {% endblock %}
