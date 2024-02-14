@@ -1,0 +1,48 @@
+{% extends 'filters/layout.html' %}
+
+{% block body %}
+    <div class="{{ style.item }}">
+        <p>variable</p>
+        <p class="{{ style.item }}">{{ greet }}</p>
+    </div>
+    <div class="{{ style.item }}">
+        <p>array</p>
+        <p class="{{ style.item }}">{{ age }}</p>
+        <p class="{{ style.item }} {{style.topic }}">array</p>
+        {% for i in num %}
+            <p class="{{ style.item }}">{{ i }}</p>
+        {% endfor %}
+    </div>
+    <div class="{{ style.item }}">
+        <p>{{ name }}</p>
+        <p class="{{ style.item }}">{{ age }}</p>
+        <p class="{{ style.item }} {{style.topic }}">array</p>
+        {% for i in num %}
+            <p class="{{ style.item }}">{{ i }}</p>
+        {% endfor %}
+    </div>
+    <div class="{{ style.item }}">
+        <p>array</p>
+        <p class="{{ style.item }}">{{ age }}</p>
+        <p class="{{ style.item }} {{style.topic }}">array</p>
+        {% for i in num %}
+            <p class="{{ style.item }}">{{ i }}</p>
+        {% endfor %}
+    </div>
+    <div class="{{ style.item }}">
+        <p>{{ name }}</p>
+        <p class="{{ style.item }}">{{ age }}</p>
+        <p class="{{ style.item }} {{style.topic }}">array</p>
+        {% for i in num %}
+            <p class="{{ style.item }}">{{ i }}</p>
+        {% endfor %}
+    </div>
+    <div class="{{ style.item }}">
+        <p>array</p>
+        <p class="{{ style.item }}">{{ age }}</p>
+        <p class="{{ style.item }} {{style.topic }}">array</p>
+        {% for i in num %}
+            <p class="{{ style.item }}">{{ i }}</p>
+        {% endfor %}
+    </div>
+{% endblock %}

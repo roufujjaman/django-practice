@@ -1,0 +1,28 @@
+:root {
+    --color-bg: 0, 0, 0;
+    --color-t1: 50, 50, 50;
+    --color-br: 240, 240, 240;
+}
+
+* {
+    background-color: rgb(var(--color-1));
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(var(--color-t1));
+
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.box {
+    display: inline-block;
+    width: max-content;
+    margin: .25rem;
+    padding: 1rem;
+    border: 1px solid rgb(var(--color-br));
+    border-radius: 5px;
+}
