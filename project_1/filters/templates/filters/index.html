@@ -1,6 +1,7 @@
 {% extends "filters/layout.html" %}
 {% load static %}
 
+{% block title %}{{ block.super }}Home{% endblock %}
 {% block body %}
     <h1>{{ arr | join:"" }}</h1>
     <h1>{{ today }}</h1>
@@ -9,5 +10,7 @@
     <h1>{{ emptyArr | default:"empty array" }}</h1>
     <h1>{{ players | dictsortreversed:"age" | join:"<br>" }}</h1>
     <img src="{% static 'filters/img1.jpg' %}" alt="">
-    <h1>{{ players | dictsortreversed:"age" | join:"<br>" }}</h1>
+
+
+    <a href="{% url 'filters:test_url' name='roufujjjamn' age='28' %}">test_url</a>
 {% endblock %}

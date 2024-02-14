@@ -1,0 +1,10 @@
+{% extends "filters/layout.html" %}
+
+{% block title %}{{ block.super }}Test{% endblock %}
+
+{% block body %}
+    {{ block.super }}
+    <h1>image inherited from the layout</h1>
+{% endblock %}
+
+{% block test_inheritance_1 %}{{ block.super }}test_inheritance>{% endblock %}

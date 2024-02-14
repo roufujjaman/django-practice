@@ -1,0 +1,12 @@
+{% extends "filters/layout.html" %}
+
+
+{% block body %}
+    <h1>test URL</h1>
+    <h1>{{ args }}</h1>
+
+    {% for n in args %}
+        <p>{{n}}</p>
+    {% endfor %}
+    
+{% endblock %}

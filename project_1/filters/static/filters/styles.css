@@ -9,12 +9,16 @@
 
 h1 {
     width: 80%;
-    background-color: rgb(172, 215, 255);
+    background-color: rgb(201, 228, 255);
     margin: auto auto;
 }
 
 img {
     width: 300px;
+}
+
+.nav {
+    background-color: rgb(189, 189, 189);
 }
 
 * {
