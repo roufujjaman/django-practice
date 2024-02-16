@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from datetime import datetime
+
 
 # Create your views here.
 def body(request):
@@ -9,5 +11,15 @@ def body(request):
             },
         "greet": "hello world",
         "age": 28,
-        "num": [123, 123, 123, 123]
+        "string1": "i'm a string with 'quotes'",
+        "name1": "bruyne",
+        "string2": "i'm a string without 'spaces'",
+        "today": datetime.today(),
+        "arr": ["A", "99", "10", "35", "X"],
+        "players": [
+            {"name": "bruyne", "age": 30},
+            {"name": "haland", "age": 22},
+            {"name": "foden", "age": 25}
+        ],
+        "filesize": 10241024,
     })

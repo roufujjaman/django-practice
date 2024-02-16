@@ -6,43 +6,49 @@
         <p class="{{ style.item }}">{{ greet }}</p>
     </div>
     <div class="{{ style.item }}">
-        <p>array</p>
-        <p class="{{ style.item }}">{{ age }}</p>
-        <p class="{{ style.item }} {{style.topic }}">array</p>
-        {% for i in num %}
+        <p>add</p>
+        <p class="{{ style.item }}">{{ age | add:"2" }}</p>
+    </div>
+    <div class="{{ style.item }}">
+        <p>addslashes</p>
+        <p class="{{ style.item }}">{{ string1 | addslashes }}</p>
+    </div>
+    <div class="{{ style.item }}">
+        <p>capfirst</p>
+        <p class="{{ style.item }}">{{ name1 | capfirst }}</p>
+    </div>
+    <div class="{{ style.item }}">
+        <p>cut</p>
+        <p class="{{ style.item }}">{{ string2 | cut:" " }}</p>
+    </div>
+    <div class="{{ style.item }}">
+        <p>date</p>
+        <p class="{{ style.item }}">{{ today | date:"D d M Y"}}</p>
+    </div>
+    <div class="{{ style.item }}">
+        <p>loop</p>
+        {% for i in arr %}
             <p class="{{ style.item }}">{{ i }}</p>
         {% endfor %}
     </div>
     <div class="{{ style.item }}">
-        <p>{{ name }}</p>
-        <p class="{{ style.item }}">{{ age }}</p>
-        <p class="{{ style.item }} {{style.topic }}">array</p>
-        {% for i in num %}
-            <p class="{{ style.item }}">{{ i }}</p>
-        {% endfor %}
+        <p>dictsort</p>
+            <p class="{{ style.item }}">{{ players | dictsort:"age" }}</p>
     </div>
     <div class="{{ style.item }}">
-        <p>array</p>
-        <p class="{{ style.item }}">{{ age }}</p>
-        <p class="{{ style.item }} {{style.topic }}">array</p>
-        {% for i in num %}
-            <p class="{{ style.item }}">{{ i }}</p>
-        {% endfor %}
+        <p>dictsort</p>
+            <p class="{{ style.item }}">{{ filesize | filesizeformat }}</p>
     </div>
     <div class="{{ style.item }}">
-        <p>{{ name }}</p>
-        <p class="{{ style.item }}">{{ age }}</p>
-        <p class="{{ style.item }} {{style.topic }}">array</p>
-        {% for i in num %}
-            <p class="{{ style.item }}">{{ i }}</p>
-        {% endfor %}
+        <p>first element of an array</p>
+            <p class="{{ style.item }}">{{ arr | first }}</p>
     </div>
     <div class="{{ style.item }}">
-        <p>array</p>
-        <p class="{{ style.item }}">{{ age }}</p>
-        <p class="{{ style.item }} {{style.topic }}">array</p>
-        {% for i in num %}
-            <p class="{{ style.item }}">{{ i }}</p>
-        {% endfor %}
+        <p>last element of an array</p>
+            <p class="{{ style.item }}">{{ arr | last }}</p>
+    </div>
+    <div class="{{ style.item }}">
+        <p>length of array</p>
+            <p class="{{ style.item }}">{{ arr | length }}</p>
     </div>
 {% endblock %}
