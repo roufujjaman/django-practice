@@ -22,4 +22,7 @@ def body(request):
             {"name": "foden", "age": 25}
         ],
         "filesize": 10241024,
+        "numbers": range(1, 10),
+        "falgun": datetime(2024, 2, 14),
+        "locations": ['bangladesh', ['dhaka', ['uttara', 'banani']], 'sylhet',['airport road']]
     })

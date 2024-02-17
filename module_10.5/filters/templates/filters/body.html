@@ -51,4 +51,24 @@
         <p>length of array</p>
             <p class="{{ style.item }}">{{ arr | length }}</p>
     </div>
+    <div class="{{ style.item }}">
+        <p>random number from an array</p>
+            <p class="{{ style.item }}">{{ numbers | random }}</p>
+    </div>
+    <div class="{{ style.item }}">
+        <p>slice array</p>
+            <p class="{{ style.item }}">{{ arr | slice:":2" }}</p>
+    </div>
+    <div class="{{ style.item }}">
+        <p>time</p>
+            <p class="{{ style.item }}">{{ today | time:"h:i:A" }}</p>
+    </div>
+    <div class="{{ style.item }}">
+        <p>timesince</p>
+            <p class="{{ style.item }}">{{ falgun | timesince }}</p>
+    </div>
+    <div class="{{ style.item }}">
+        <p>list</p>
+            <p>{{ locations | unordered_list }}</p>
+    </div>
 {% endblock %}
