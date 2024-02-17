@@ -56,4 +56,6 @@ meals = [
     ]
 
 def home(request):
-    return render(request, 'meals/home.html')
+    return render(request, 'meals/home.html', {
+        "meals": meals
+    })

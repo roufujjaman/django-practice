@@ -2,7 +2,16 @@
 
 {% block title %}{{ block.super }}Meala{% endblock %}
 
-
 {% block body %}
- <h1>food goes here</h1>
+    <div class="meals-container">
+        {% for meal in meals %}
+            <div class="card">
+                <img src="{{ meal.strMealThumb }}" alt="">
+                <div class="contents">
+                    <h3>{{ meal.strMeal }}</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti nemo at repudiandae ratione quod qui</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

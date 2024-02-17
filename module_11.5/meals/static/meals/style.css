@@ -1,0 +1,33 @@
+* {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.meals-container {
+    margin: 4rem 0;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    justify-content: center;
+    gap: 10px;
+}
+
+.card {
+    width: 250px;
+
+    border-radius: 8px;
+    border: 1px solid rgb(230, 230, 230);
+    overflow: hidden;
+}
+
+.card img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.card .contents {
+    padding: 1rem;
+}
