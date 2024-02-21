@@ -4,7 +4,13 @@
 {% block title %}{{ block.super }}Meals{% endblock %}
 
 {% block body %}
-    <h1>meals</h1>
-    <img src="{% static 'meals\img1.jpg' %}" alt="">
-    <h1>img</h1>
+    <div class="item-container">
+        {% for category in categories %}
+        <div class="item-card">
+            <h3>{{ category.strCategory }}</h3>
+            <img src="{{ category.strCategoryThumb }}" alt="">
+            <p>{{ category.strCategoryDescription | truncatewords:10 }}</p>
+        </div>
+        {% endfor %}
+    </div>
 {% endblock %}

@@ -5,12 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>restaurantX {% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'meals/style.css' %}">
+    <link rel="stylesheet" href="{% static 'restaurantX/style.css' %}">
 </head>
 <body>
     <nav>
-        <a href="{% url 'home' %}" class="logo">restaurantX</a>
-        <a href="{% url 'meals' %}">meals</a>
+        <img src="{% static 'restaurantX/img/logo.png' %}" alt="logo">
+        <a href="{% url 'home' %}" class="logo">Home</a>
+        <a href="{% url 'meals:home' %}">Show Items</a>
+        <a href="{% url 'aboutus:home' %}">About Us</a>
     </nav>
     {% block body %}
     {% endblock %}

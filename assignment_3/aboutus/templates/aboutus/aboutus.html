@@ -1,0 +1,27 @@
+{% extends 'restaurantX/layout.html' %}
+{% load static %}
+
+{% block title %}{{ block.super }}About Us{% endblock %}
+
+{% block body %}
+    <div class="cover">
+        <div>
+            <h1>Welcome to RestaurantX</h1>
+            <h1>Where we strive to provide you with an exceptional dining experience.</h1>
+            <p>At <a href="{% url 'home' %}">RestaurantX</a>, we believe in serving delicious food made from fresh, locally sourced ingredients. Our talented chefs craft each dish with care, ensuring that every bite is bursting with flavor.</p>
+
+        </div>
+    </div>
+    <div style="margin: 2rem auto; width: 60%;">
+        <img src="{% static 'aboutus/img/owners.jpg' %}" alt="">
+        <div>
+            <h1>Meet the Owners</h1>
+            <h2>John Doe</h2> 
+            <h2>Jane Doe</h2> 
+            <address>
+                <a href="mailto:johm.doe@example.com">Email: johm.doe@example.com</a><br>
+                <a href="callto:+8801711588795">Phone: +8801711588795</a>
+            </address>
+        </div>
+    </div>
+{% endblock %}
