@@ -24,5 +24,6 @@ def body(request):
         "filesize": 10241024,
         "numbers": range(1, 10),
         "falgun": datetime(2024, 2, 14),
-        "locations": ['bangladesh', ['dhaka', ['uttara', 'banani']], 'sylhet',['airport road']]
+        "locations": ['bangladesh', ['dhaka', ['uttara', 'banani']], 'sylhet',['airport road']],
+        "longtext": "this is not a long text to be honest"
     })

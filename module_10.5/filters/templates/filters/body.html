@@ -71,4 +71,13 @@
         <p>list</p>
             <p>{{ locations | unordered_list }}</p>
     </div>
+    <div class="{{ style.item }}">
+        <p>truncate charecters</p>
+            <p>{{ longtext | truncatechars:10 }}</p>
+    </div>
+    <div class="{{ style.item }}">
+        <p>truncate words</p>
+            <p>{{ longtext | truncatewords:5 }}</p>
+    </div>
+
 {% endblock %}

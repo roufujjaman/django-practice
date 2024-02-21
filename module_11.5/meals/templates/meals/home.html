@@ -1,10 +1,5 @@
 {% extends 'meals/layout.html' %}
-
-{% block title %}{{ block.super }}Home{    <div class="{{ style.item }}">
-        <p>length of array</p>
-            <p class="{{ style.item }}">{{ arr | length }}</p>
-    </div>% endblock %}
-
+{% block title %}{{ block.super}}Meals{% endblock %}
 {% block body %}
     <div class="meals-container">
         {% for meal in meals %}
