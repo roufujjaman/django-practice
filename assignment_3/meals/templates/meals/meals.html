@@ -1,7 +1,10 @@
 {% extends 'restaurantX/layout.html' %}
+{% load static %}
 
 {% block title %}{{ block.super }}Meals{% endblock %}
 
 {% block body %}
- <h1>meals</h1>
+    <h1>meals</h1>
+    <img src="{% static 'meals\img1.jpg' %}" alt="">
+    <h1>img</h1>
 {% endblock %}
