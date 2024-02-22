@@ -19,6 +19,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls), 
-    path('form/', views.form, name='form')
+    path('admin/', admin.site.urls),
+    path('', views.home, name='home'), 
+    path('form/', views.form, name='form'),
+    path('users/', views.users, name='users')
 ]

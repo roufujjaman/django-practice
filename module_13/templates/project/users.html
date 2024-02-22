@@ -1,0 +1,14 @@
+{% extends 'project/index.html' %}
+
+{% block title %}
+    Users
+{% endblock %}
+
+{% block body %}
+    {% for user in users %}
+        <div class="box-1">
+            <h3>{{ user.name }}</h3>
+            <p>{{ user.email }}</p>
+        </div>  
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'project/index.html' %}
+
+{% block title %}
+    Form
+{% endblock %}
+
+{% block body %}
+    <div class="box-1">
+        <form method="POST">
+            {% csrf_token %}
+            <label for="user_name">User Name</label><br>
+            <input type="text" id="user-name" value="John Doe" name="user_name"><br>
+            <label for="user_email">Email</label><br>
+            <input type="email" id="user-email" value="john@example.com" name="email"><br>
+            <button>Submit</button>
+        </form> 
+    </div>
+{% endblock %}
