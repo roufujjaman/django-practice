@@ -10,7 +10,7 @@ def form(request):
         name = request.POST.get('user_name')
         email = request.POST.get('email')
         all_users.append({"name": name, "email": email})
-        return render(request, 'project/form.html')
+        return render(request, 'project/users.html')
     else:
         return render(request, 'project/form.html')
 

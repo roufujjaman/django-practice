@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-    <div class="box-1">
+    <div class="box-1" action="/users">
         <form method="POST">
             {% csrf_token %}
             <label for="user_name">User Name</label><br>
