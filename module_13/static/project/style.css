@@ -16,11 +16,3 @@ input {
     margin: 0.75rem auto; 
     border: 1px solid rgb(179, 179, 179);
 }
-
-button {
-    background-color: rgb(117, 117, 117);
-    border: none;
-    margin-top: 1rem;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-}
