@@ -37,3 +37,7 @@ def users(request):
     return render(request, 'project/users.html', {
         "users": all_users
         })
+
+
+def test(request):
+    return render
