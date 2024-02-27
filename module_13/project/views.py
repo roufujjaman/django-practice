@@ -5,6 +5,8 @@ from django.http import HttpResponseRedirect
 class NewUser(forms.Form):
     name = forms.CharField(label="User Name", empty_value="Name")
     email = forms.EmailField(label="Email")
+    age = forms.IntegerField(label="Age")
+    weight = forms.FloatField(label="Weight")
 
 all_users = []
 
@@ -37,7 +39,3 @@ def users(request):
     return render(request, 'project/users.html', {
         "users": all_users
         })
-
-
-def test(request):
-    return render
