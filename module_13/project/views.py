@@ -1,14 +1,32 @@
 from django.shortcuts import render
 from django import forms
-from django.http import HttpResponseRedirect
 
-# class NewUser(forms.Form):
-#     name = forms.CharField(label="User Name", empty_value="Name")
-#     email = forms.EmailField(label="Email")
-#     age = forms.IntegerField(label="Age")
-#     weight = forms.FloatField(label="Weight")
-#     SIZE_CHOICES = [("S", "Small"), ("L", "Large"), ("XL", "Extra Large")]
-#     size = forms.ChoiceField(label="Size", choices=SIZE_CHOICES)
+class newUser(forms.Form):
+    fullname = forms.CharField(
+        label="Full name",
+        max_length=5,
+    )
+    email = forms.EmailField(
+        label="Email",
+        required=False,
+        widget=forms.EmailInput(attrs={"class": "red"})
+    )
+    country = forms.CharField(
+        label="Country",
+        initial="Bangladesh",
+        disabled=True
+    )
+    file = forms.FileField(
+        label="File",
+        required=False
+    )
+    color = forms.CharField(
+        label="Color Test",
+        widget=forms.TextInput(attrs={
+            "class": "red",
+            "placeholder": "is it red really?"
+            })
+    )
 
 all_users = []
 
@@ -17,15 +35,10 @@ def home(request):
 
 def form(request):
     if request.method == "POST":
-        file = request.FILES["file"]
-        with open('./upload/' + file.name, 'wb+') as destination:
-            for chunk in file.chunks():
-                destination.write(chunk)
-        print(file)
-        return render(request, "project/form.html")
-    
-
-    return render(request, "project/form.html")
+        pass
+    return render(request, "project/form.html", {
+        "newUser": newUser
+        })
 
 def users(request):
     return render(request, 'project/users.html', {

@@ -23,3 +23,7 @@ input {
     padding: 0 1rem;
     color: rgb(216, 25, 0);
 }
+
+.red {
+    background-color: rgb(255, 209, 209);
+}
