@@ -3,13 +3,11 @@ from django import forms
 
 class newUser(forms.Form):
     fullname = forms.CharField(
-        label="Full name",
-        max_length=5,
+        widget=forms.TextInput
     )
     email = forms.EmailField(
         label="Email",
         required=False,
-        widget=forms.EmailInput(attrs={"class": "red"})
     )
     country = forms.CharField(
         label="Country",
@@ -22,11 +20,18 @@ class newUser(forms.Form):
     )
     color = forms.CharField(
         label="Color Test",
+        required=False,
         widget=forms.TextInput(attrs={
             "class": "red",
             "placeholder": "is it red really?"
             })
     )
+    def clean_fullname(self):
+        valfullname = self.cleaned_data["fullname"]
+        if len(valfullname) < 10:
+            raise forms.ValidationError("Not Enough Charecters(min 10 characters)")
+            print("--came here--")
+        return valfullname
 
 all_users = []
 
@@ -35,7 +40,9 @@ def home(request):
 
 def form(request):
     if request.method == "POST":
-        pass
+        print(request.POST["fullname"])
+    else:
+        form = newUser()
     return render(request, "project/form.html", {
         "newUser": newUser
         })
