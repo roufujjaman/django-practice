@@ -40,9 +40,13 @@ def home(request):
 
 def form(request):
     if request.method == "POST":
-        print(request.POST["fullname"])
-    else:
-        form = newUser()
+        form = newUser(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data)
+        else:
+            return render(request, "project/form.html", {
+                "newUser": form
+            })
     return render(request, "project/form.html", {
         "newUser": newUser
         })
