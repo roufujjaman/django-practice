@@ -1,0 +1,13 @@
+{% extends 'project/index.html' %}
+{% block title %}
+    File
+{% endblock %}
+{% block body %}
+    <div class="box-1">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ newFile }}
+            <input type="submit">
+        </form>
+    </div>
+{% endblock %}
