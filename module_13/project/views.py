@@ -61,8 +61,12 @@ def form(request):
     })
 
 def file(request):
+    if request.method == "POST":
+        userForm = newFile(request.POST, request.FILES)
+        if userForm.is_valid:
+            print(userForm)
     return render(request, 'project/file.html', {
-        "newFile": newFile()
+        "newForm": newFile()
     })
 
 def users(request):
