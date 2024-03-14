@@ -3,7 +3,9 @@ from django import forms
 
 class newUser(forms.Form):
     username = forms.CharField(
-        label="User Name"
+        label="User Name",
+        initial="John Doe",
+        help_text="Enter Full Name"
     )
     useremail = forms.EmailField(
         label="Email"
@@ -15,7 +17,12 @@ class newUser(forms.Form):
         label="Weight"
     )
     birthday = forms.DateField(
-        label="Birthday"
+        label="Birthday",
+        
+        # use of widget
+        widget=forms.DateInput(
+            attrs={"type": "date"}
+        )
     )
     sizeCHOICES = [("S", "SMALL"), ("M", "MEDIUM"), ("L", "LARGE")]
     size = forms.ChoiceField(
@@ -25,7 +32,8 @@ class newUser(forms.Form):
     itemCHOICES = [(1, "PAPER"), (2, "PEN"), (3, "PENCIL"), (4, "ERASER")]
     items = forms.MultipleChoiceField(
         label="Gift",
-        choices=itemCHOICES
+        choices=itemCHOICES,
+        widget=forms.CheckboxSelectMultiple
     )
     check = forms.BooleanField(
         label="Agree"
@@ -63,10 +71,17 @@ def form(request):
 def file(request):
     if request.method == "POST":
         userForm = newFile(request.POST, request.FILES)
-        if userForm.is_valid:
-            print(userForm)
+        if userForm.is_valid():
+            file = userForm.cleaned_data['file']
+            with open('upload/' + file.name, "wb+") as destination:
+                for chunk in file.chunks():
+                    destination.write(chunk)
+        else:
+            return render(request, 'project/file.html', {
+                "fileForm": userForm
+            })
     return render(request, 'project/file.html', {
-        "newForm": newFile()
+        "fileForm": newFile()
     })
 
 def users(request):
