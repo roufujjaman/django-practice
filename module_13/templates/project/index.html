@@ -17,10 +17,13 @@
         <a href="{% url 'form' %}">Form</a>
         <a href="{% url 'file' %}">File</a>
         <a href="{% url 'users' %}">Users</a>
+        <a href="{% url 'validation' %}">Login (aka validation)</a>
     </nav>
 
-    {% block body %}
-    {% endblock %}
+    <div class="box-1">
+        {% block body %}
+        {% endblock %}
+    </div>
     
 </body>
 </html>

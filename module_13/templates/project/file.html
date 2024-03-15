@@ -3,11 +3,9 @@
     File
 {% endblock %}
 {% block body %}
-    <div class="box-1">
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ fileForm }}
             <input type="submit">
         </form>
-    </div>
 {% endblock %}

@@ -1,6 +1,10 @@
 from django.shortcuts import render
 from django import forms
 
+def home(request):
+    return render(request, 'project/index.html')
+
+
 class newUser(forms.Form):
     username = forms.CharField(
         label="User Name",
@@ -39,18 +43,8 @@ class newUser(forms.Form):
         label="Agree"
     )
 
-class newFile(forms.Form):
-    username = forms.CharField(
-        label="User Name"
-    )
-    file = forms.FileField(
-        label="Upload File"
-    )
 
 all_users = []
-
-def home(request):
-    return render(request, 'project/index.html')
 
 def form(request):
     if request.method == "POST":
@@ -68,6 +62,14 @@ def form(request):
         "newUser": newUser()
     })
 
+class newFile(forms.Form):
+    username = forms.CharField(
+        label="User Name"
+    )
+    file = forms.FileField(
+        label="Upload File"
+    )
+
 def file(request):
     if request.method == "POST":
         userForm = newFile(request.POST, request.FILES)
@@ -83,6 +85,9 @@ def file(request):
     return render(request, 'project/file.html', {
         "fileForm": newFile()
     })
+
+def validation(request):
+    return render(request, 'project/validation.html')
 
 def users(request):
     return render(request, 'project/users.html', {
