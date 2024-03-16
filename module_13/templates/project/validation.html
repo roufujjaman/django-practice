@@ -6,6 +6,8 @@
 
 {% block body %}
     <form method="post">
-        <input type="text" name="" id="">
+        {% csrf_token %}
+        {{ validationForm }}
+        <input type="submit">
     </form>
 {% endblock %}

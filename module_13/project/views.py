@@ -1,8 +1,9 @@
+from typing import Any
 from django.shortcuts import render
 from django import forms
 
 def home(request):
-    return render(request, 'project/index.html')
+    return render(request, "project/index.html")
 
 
 class newUser(forms.Form):
@@ -55,10 +56,10 @@ def form(request):
                 "email": userForm.cleaned_data["useremail"]
                 })
         else:
-            return render(request, 'project/form.html', {
+            return render(request, "project/form.html", {
                 "newUser": userForm
             })
-    return render(request, 'project/form.html', {
+    return render(request, "project/form.html", {
         "newUser": newUser()
     })
 
@@ -74,22 +75,65 @@ def file(request):
     if request.method == "POST":
         userForm = newFile(request.POST, request.FILES)
         if userForm.is_valid():
-            file = userForm.cleaned_data['file']
-            with open('upload/' + file.name, "wb+") as destination:
+            file = userForm.cleaned_data["file"]
+            with open("upload/" + file.name, "wb+") as destination:
                 for chunk in file.chunks():
                     destination.write(chunk)
         else:
-            return render(request, 'project/file.html', {
+            return render(request, "project/file.html", {
                 "fileForm": userForm
             })
-    return render(request, 'project/file.html', {
+    return render(request, "project/file.html", {
         "fileForm": newFile()
     })
 
+class formValidation(forms.Form):
+    username = forms.CharField(
+        label="User Name"
+    )
+    email = forms.EmailField(
+        label="Email"
+    )
+    # approach 1
+
+    # def clean_username(self):
+    #     val = self.cleaned_data["username"]
+    #     if len(val) < 5:
+    #         raise forms.ValidationError("username must be more than 5 charecters")
+    #     return val
+
+    # def clean_email(self):
+    #     val = self.cleaned_data["email"]
+    #     if ".edu" not in val:
+    #         raise forms.ValidationError("email must be an .edu")
+    #     return val
+    
+    # approach 2
+
+    def clean(self):
+        cleaned_date = super().clean()
+        val1 = self.cleaned_data["username"]
+        val2 = self.cleaned_data["email"]
+
+        if len(val1) < 5:
+            raise forms.ValidationError("username must be >5 characters")
+        if ".edu" not in val2:
+            raise forms.ValidationError("email must be a '.edu'")
+ 
 def validation(request):
-    return render(request, 'project/validation.html')
+    if request.method == "POST":
+        userForm = formValidation(request.POST)
+        if userForm.is_valid():
+            print(userForm.cleaned_data["email"])
+        else:
+            return render(request, "project/validation.html", {
+                "validationForm": userForm
+            })
+    return render(request, "project/validation.html", {
+        "validationForm": formValidation()
+    })
 
 def users(request):
-    return render(request, 'project/users.html', {
+    return render(request, "project/users.html", {
         "users": all_users
         })
