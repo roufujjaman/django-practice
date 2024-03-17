@@ -1,6 +1,7 @@
 from typing import Any
 from django.shortcuts import render
 from django import forms
+from django.core import validators
 
 def home(request):
     return render(request, "project/index.html")
@@ -89,13 +90,13 @@ def file(request):
 
 class formValidation(forms.Form):
     username = forms.CharField(
-        label="User Name"
+        label="user name"
     )
     email = forms.EmailField(
-        label="Email"
+        label="email"
     )
-    # approach 1
 
+    # approach 1 <<<<<<<<<<<<<<<
     # def clean_username(self):
     #     val = self.cleaned_data["username"]
     #     if len(val) < 5:
@@ -108,21 +109,67 @@ class formValidation(forms.Form):
     #         raise forms.ValidationError("email must be an .edu")
     #     return val
     
-    # approach 2
 
+    # approach 2 <<<<<<<<<<<<<<<
     def clean(self):
         cleaned_date = super().clean()
         val1 = self.cleaned_data["username"]
         val2 = self.cleaned_data["email"]
 
         if len(val1) < 5:
-            raise forms.ValidationError("username must be >5 characters")
+            raise forms.ValidationError("username must be at least 5 characters")
         if ".edu" not in val2:
             raise forms.ValidationError("email must be a '.edu'")
+    
+
+    # approach 3 <<<<<<<<<<<<<<<
+    age = forms.IntegerField(
+        label="age",
+        validators=[
+            validators.MinValueValidator(
+                18,
+                message="age must be between 18 - 40"
+            ),
+            validators.MaxValueValidator(
+                40,
+                message="age must be between 18 - 40"
+            ),
+        ]
+    )
+    picture = forms.FileField(
+        label="profile picture",
+        validators=[
+            validators.FileExtensionValidator(
+                allowed_extensions=["jpeg", "jpg"],
+                message="image must be .jpg or .jpeg",
+            )
+        ]
+    ) 
+    password = forms.CharField(
+        label="password",
+        widget=forms.PasswordInput(),
+        validators=[
+            validators.MinLengthValidator(
+                8,
+                message="password must be at least 8 characters"
+            ),
+        ]
+    )
+    confirmpassword = forms.CharField(
+        label="confirm password",
+        widget=forms.PasswordInput(),
+    )
+    
+    def clean(self):
+        cleaned_data = super().clean()
+        password1 = self.cleaned_data["password"]
+        password2 = self.cleaned_data["confirmpassword"]
+        if password1 != password2:
+            raise forms.ValidationError("password does not match")
  
 def validation(request):
     if request.method == "POST":
-        userForm = formValidation(request.POST)
+        userForm = formValidation(request.POST, request.FILES)
         if userForm.is_valid():
             print(userForm.cleaned_data["email"])
         else:
