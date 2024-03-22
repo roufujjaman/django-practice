@@ -9,4 +9,7 @@ class Student(models.Model):
         max_length=20,
     )
     address = models.TextField()
-    email = models.TextField()
+    email = models.TextField(default=None)
+
+    def __str__(self):
+        return f"{self.roll}, {self.name}"
