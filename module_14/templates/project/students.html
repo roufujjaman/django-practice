@@ -2,9 +2,30 @@
 
 {% block body %}
     <h1>Students</h1>
-    {% for student in students %}
-        <p>{{ student.name }}</p>
-    {% empty %}
-        <p>No Students</p>
-    {% endfor %}
+    <table>
+        <thead>
+            <tr>
+                <td>Roll</td>
+                <td>Name</td>
+                <td>Address</td>
+                <td>Email</td>
+                <td>Action</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+                <tr>
+                    <td>{{ student.roll }}</td>
+                    <td>{{ student.name }}</td>
+                    <td>{{ student.address }}</td>
+                    <td>{{ student.email }}</td>
+                    <td>
+                        <a href="{% url 'first_app:delete_student' student.roll %}" class="btn-delete">Delete</a>
+                    </td>
+            {% empty %}
+                    <td>No Students</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
