@@ -2,6 +2,6 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 def home(request):
-    return render(request, "project/layout.html", {
-        "name": "Project-001",
-    })
+    return HttpResponse(
+        "<h1><a href='/first_app'>First App</a><h1>"
+    )
