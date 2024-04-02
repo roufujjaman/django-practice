@@ -9,3 +9,6 @@ def home(request):
 def delete_student(request, roll):
     std = models.Student.objects.get(pk = roll).delete()
     return redirect("first_app:home")
+
+def add_student(request):
+    pass
