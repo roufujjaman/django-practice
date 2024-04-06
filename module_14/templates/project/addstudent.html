@@ -1,9 +1,10 @@
 {% extends 'project/layout.html' %}
-
+{% load static %}
 {% block body %}
     <form action="" method="POST">
         {% csrf_token %}
         {{ studentform }}
         <input type="submit" name="" id="">
     </form>
+    <a href="{% url 'first_app:home'%}">All Students</a>
 {% endblock %}

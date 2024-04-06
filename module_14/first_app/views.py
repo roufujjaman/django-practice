@@ -12,6 +12,15 @@ def delete_student(request, roll):
     return redirect("first_app:home")
 
 def add_student(request):
+    if request.method == "POST":
+        userStudentForm = appforms.StudentForm(request.POST)
+        if userStudentForm.is_valid():
+            userStudentForm.save()
+            print(userStudentForm.cleaned_data)
+        else:
+            return render(request, "project/addstudent.html", {
+                "studentform": userStudentForm
+            })
     return render(request, "project/addstudent.html", {
         "studentform": appforms.StudentForm
     })

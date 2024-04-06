@@ -21,3 +21,9 @@ tr {
     background-color: rgb(255, 158, 255);
     border-radius: 4px;
 }
+
+
+.red {
+    background-color: rgb(255, 159, 159);
+    color: blue;
+}
