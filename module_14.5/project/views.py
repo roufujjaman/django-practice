@@ -1,5 +1,7 @@
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
 from django import forms
+
 
 class UserForm(forms.Form):
     name = forms.CharField(
@@ -53,6 +55,19 @@ def home(request):
     return render(request, "project/layout.html")
 
 def form(request):
+    if request.method == "POST":
+        user_form = UserForm(request.POST)
+        if user_form.is_valid():
+            print("Form Submitted Successfully ")
+            return HttpResponseRedirect("/")
+        else:
+            return render(request, "project/form.html", {
+                "userForm": user_form
+            })
+
     return render(request, "project/form.html", {
-        "userForm": UserForm()
-    })
+            "userForm": UserForm()
+            })
+
+def modelform(request):
+    pass

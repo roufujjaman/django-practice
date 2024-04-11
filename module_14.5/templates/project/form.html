@@ -5,7 +5,8 @@
 
 {% block body %}
     <h1>Form</h1>
-    <form action="">
+    <form method="POST">
+        {% csrf_token %}
         {{ userForm }}
         <div>
             <input type="submit">
