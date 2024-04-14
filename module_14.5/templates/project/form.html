@@ -1,5 +1,4 @@
 {% extends 'project/layout.html' %}
-{% load static %}
 
 {% block title %}Form{% endblock %}
 
@@ -12,4 +11,5 @@
             <input type="submit">
         </div>
     </form>
+    <h1><a href="{% url 'home' %}">Back</a></h1>
 {% endblock %}

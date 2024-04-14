@@ -68,6 +68,3 @@ def form(request):
     return render(request, "project/form.html", {
             "userForm": UserForm()
             })
-
-def modelform(request):
-    pass
