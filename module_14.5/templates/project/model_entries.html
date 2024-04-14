@@ -1,0 +1,26 @@
+{% extends 'project/layout.html' %}
+
+{% block body %}
+    <style>
+        .box {
+            width: 25%;
+            background-color: rgb(216, 255, 191);
+            margin: 1rem;
+            border: 1px solid rgb(196, 240, 170);
+            border-radius: 8px;
+        }
+        .box > * {
+            padding: .5rem;
+        }
+    </style>
+    <h1><a href="{% url 'modelform:model' %}">1. Model</a></h1>
+    {% for entry in entries %}
+        <div class="box">
+            <p><strong>{{ entry.id }}</strong></p>
+            <p>{{ entry.name }}</p>
+            <p>{{ entry.size }}</p>
+            <p>{{ entry.date }}</p>
+        </div>
+    {% endfor %}
+    <h1><a href="{% url 'modelform:model' %}">Back</a></h1>
+{% endblock %}

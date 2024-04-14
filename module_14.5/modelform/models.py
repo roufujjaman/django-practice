@@ -2,16 +2,20 @@ from django.db import models
 
 # Create your models here.
 class MyModel(models.Model):
-    serial = models.AutoField(primary_key=True)
+    SHIRT_SIZES = {
+        "S": "Small",
+        "M": "Medium",
+        "L": "Large"
+    }
+    id = models.AutoField(primary_key=True)
     name = models.CharField(
         max_length=300 
     )
-    date = models.DateField(
-        blank=True,
-        null=True
+    size = models.CharField(
+        max_length=1,
+        choices=SHIRT_SIZES
     )
-    datetime = models.DateTimeField()
-    decimal = models.DecimalField(
-        max_digits=5,
-        decimal_places=2
-    )
+    date = models.DateField()
+
+    def __str__(self) -> str:
+        return f"{self.name}"

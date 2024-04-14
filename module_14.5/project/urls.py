@@ -22,6 +22,6 @@ from project import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name="home"),
-    path('form', views.form, name="form"),
-    path('modelform', include('modelform.urls'))
+    path('form/', views.form, name="form"),
+    path('modelform/', include("modelform.urls"))
 ]

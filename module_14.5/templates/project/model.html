@@ -1,0 +1,27 @@
+{% extends 'project/layout.html' %}
+
+
+{% block body %}
+    <h1>1. Model</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="name" class="red">Full Name</label>
+            <input id="name" name="name" type="text">
+            <br>
+            <label for="small">Small</label>
+            <input type="radio" name="size" id="small" value="S">
+            <br>
+            <label for="medium">Medium</label>
+            <input type="radio" name="size" id="medium" value="M">
+            <br>
+            <label for="large">Large</label>
+            <input type="radio" name="size" id="large" value="L">
+            <br>
+            <label for="date">Date</label>
+            <input type="date" name="date" id="date">
+            <br>
+            <input type="submit">
+        </form>
+    <h1><a href="{% url 'modelform:model_entries' %}">All Entries</a></h1>
+    <h1><a href="{% url 'modelform:home' %}">Back</a></h1>
+{% endblock %}
