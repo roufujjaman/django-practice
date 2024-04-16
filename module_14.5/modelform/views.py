@@ -21,3 +21,10 @@ def model_entries(request):
     return render(request, "project/model_entries.html", {
         "entries": models.MyModel.objects.all()
     })
+
+def get_by_id(request, id):
+    user_data = models.MyModel.objects.get(pk=id)
+    print(user_data)
+    return render(request, "project/model_entries.html", {
+        "entries": models.MyModel.objects.all()
+    })
