@@ -1,10 +1,9 @@
 {% extends 'layout.html' %}
 {% load crispy_forms_tags %}
 
-
 {% block content %}
-    <h1 class="middle">Profiles</h1>
-    <form class="middle">
+    <h1 class="middle">Posts</h1>
+    <form method="POST" class="middle">
         {% csrf_token %}
         {{ form | crispy }}
         <button class="btn btn-warning">Submit</button>
