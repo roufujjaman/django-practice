@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div class="row middle">
+        {% for post in posts %}
+            <div class="col-sm-6 mb-3 mb-sm-0 mt-3">
+                <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <p class="card-text">{{ post.content }}</p>
+                    <p>Author: {{ post.author.name }}</p>
+                    <p>Category: 
+                        {% for cat in post.category.all %}
+                            <button class="btn btn-primary mt-1" disabled>{{ cat }}</button>
+                        {% endfor %}
+                    </p>
+                    <a href="{% url 'edit_post' post.id %}" class="btn btn-warning">Edit</a>
+                    <a href="{% url 'delete_post' post.id %}" class="btn btn-danger">Delete</a>
+                </div>
+                </div>
+            </div>
+    {% endfor %}
+    </div>
+{% endblock %}
