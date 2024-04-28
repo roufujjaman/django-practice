@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-=nsn)78&pjgr7%7qs4@5!oo=%^h6ort16w9fqag_&aolnf)85v'
+SECRET_KEY = 'django-insecure-y(h4^mx7j_r7)k%zgfd2$0zr2vnqq^kyz0&%o)ql#4tw3_s%_o'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,7 +37,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'albums',
+    'musicians',
+    'crispy_forms',
+    'crispy_bootstrap5'
 ]
+
+CRSIPY_ALLOWED_TEMPLATE_PACKS = 'bootsrap5'
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -54,7 +61,7 @@ ROOT_URLCONF = 'musicians_directory.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
