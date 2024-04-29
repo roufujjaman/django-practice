@@ -5,7 +5,8 @@ class Album(models.Model):
     name = models.CharField(max_length=150)
     musician = models.ForeignKey(
         Musician,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name='albums'
     )
     release_date = models.DateField()
     RATING_CHOICES = (

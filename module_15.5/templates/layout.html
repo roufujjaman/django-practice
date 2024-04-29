@@ -34,26 +34,28 @@
                     <th scope="col">ID</th>
                     <th scope="col">Musician Name</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Album Name</th>
                     <th scope="col">Album Rating</th>
                     <th scope="col">Instrument Type</th>
-                    <th scope="col">Rekease Date</th>
+                    <th scope="col">Album Name</th>
+                    <th scope="col">Release Date</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 {% for musician in musicians %}
-                    <tr>
-                        <th scope="row">{{ musician.id }}</th>
-                        <td>{{ musician.first_name }} {{ musician.last_name }}</td>
-                        <td>{{ musician.email }}</td>
-                        <td>X</td>
-                        <td>X</td>
-                        <td>{{ musician.instrument_type }}</td>
-                        <td>X</td>
-                        <td><a href="" class="btn btn-danger">Edit</a></td>
-                        <td><a href="" class="btn btn-danger">Delete</a></td>
-                    </tr>
+                    {% for album in musician.albums.all %}
+                        <tr>
+                            <th scope="row">{{ musician.id }}</th>
+                            <td>{{ musician.first_name }} {{ musician.last_name }}</td>
+                            <td>{{ musician.email }}</td>
+                            <td>{{ album.rating }}</td>
+                            <td>{{ musician.instrument_type }}</td>
+                            <td>{{ album.name }}</td>
+                            <td>{{ album.release_date }}</td>
+                            <td><a href="" class="btn btn-danger">Edit</a></td>
+                            <td><a href="" class="btn btn-danger">Delete</a></td>
+                        </tr>
+                    {% endfor %}
                 {% endfor %}
             </tbody>
         </table>
