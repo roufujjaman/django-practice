@@ -12,7 +12,7 @@
         <div class="container-fluid">
             <a class="navbar-brand" href="{% url 'home' %}">Musician's Directory</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -52,8 +52,20 @@
                             <td>{{ musician.instrument_type }}</td>
                             <td>{{ album.name }}</td>
                             <td>{{ album.release_date }}</td>
-                            <td><a href="" class="btn btn-danger">Edit</a></td>
-                            <td><a href="" class="btn btn-danger">Delete</a></td>
+                            <td><a href="{% url 'edit_musician' musician.id %}" class="btn btn-secondary">Edit</a></td>
+                            <td><a href="{% url 'delete_musician' musician.id %}" class="btn btn-danger">Delete</a></td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <th scope="row">{{ musician.id }}</th>
+                            <td>{{ musician.first_name }} {{ musician.last_name }}</td>
+                            <td>{{ musician.email }}</td>
+                            <td></td>
+                            <td>{{ musician.instrument_type }}</td>
+                            <td></td>
+                            <td></td>
+                            <td><a href="{% url 'edit_musician' musician.id %}" class="btn btn-secondary">Edit</a></td>
+                            <td><a href="{% url 'delete_musician' musician.id %}" class="btn btn-danger">Delete</a></td>
                         </tr>
                     {% endfor %}
                 {% endfor %}

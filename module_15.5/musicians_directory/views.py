@@ -3,8 +3,9 @@ from musicians.models import Musician
 
 def home(request):
     
-    # musicians = Musician.objects.all() # also works
-    musicians = Musician.objects.prefetch_related('albums').all()
+    # musicians = Musician.objects.prefetch_related('albums').all()
+    musicians = Musician.objects.all()
+    print(musicians)
     return render(request, 'layout.html', {
         'musicians': musicians
     })
