@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block body %}
+    <div class="mx-auto" style="width: 50%;">
+        <h4>Categories</h4>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form | crispy }}
+            <button class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+{% endblock %}
