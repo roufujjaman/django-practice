@@ -5,45 +5,30 @@
     <div class="mx-auto" style="width: 50%;">
         <h4>All Tasks</h4>
         <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for task in tasks %}
             <div class="col">
                 <div class="card h-100">
-                    <img src="..." class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
-                            content. This content is a little bit longer.</p>
+                        <h5 class="card-title">{{ task.id }}</h5>
+                        <h5 class="card-text">{{ task.title }}</h5>
+                        <p class="card-text text-secondary">{{ task.assign_date }}</p>
+                        <p class="card-text text-secondary">{{ task.description }}</p>
+                        {% for category in task.categories.all %}
+                        <p class="card-text ">{{ category.name }}</p>
+                        {% endfor %}
+                        {% if not task.is_completed %}
+                        <a href="{% url 'edit_task' task.id %}"><button class="btn btn-secondary">Edit</button></a>
+                        <a href="{% url 'delete_task' task.id %}"><button class="btn btn-danger">Delete</button></a>
+                        {% endif %}
+                        {% if task.is_completed %}
+                        <button class="btn btn-success" disabled>Completed</button>
+                        {% endif %}
                     </div>
                 </div>
             </div>
-            <div class="col">
-                <div class="card h-100">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a short card.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card h-100">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
-                            content.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card h-100">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
-                            content. This content is a little bit longer.</p>
-                    </div>
-                </div>
-            </div>
+            {% empty %}
+                <p>No Task Pending</p>
+            {% endfor %}
         </div>
     </div>
 {% endblock %}
