@@ -23,10 +23,5 @@
             <input type="submit">
         </form>
     <h1><a href="{% url 'modelform:model_entries' %}">All Entries</a></h1>
-    <form method="GET" action="{% url 'modelform:get_by_id' id %}">
-        <label for="id">Get By ID</label>
-        <input type="text" name="id" id="id">
-        <input type="submit" name="" id="">
-    </form>
     <h1><a href="{% url 'modelform:home' %}">Back</a></h1>
 {% endblock %}
