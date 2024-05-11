@@ -4,5 +4,16 @@
 <div class="mx-auto mt-3" style="width: 400px;">
     <h1>Welcome To Profile</h1>
     <h2>Hello, {{ user }}</h2>
+
+    <div class="text-success">
+        {% if messages %}
+            {% for m in messages %}
+                <p>{{ m }}</p>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <a href="{% url 'change_password' %}" class="btn btn-light">Change Password</a>
+    <a href="{% url 'change_userdata' %}" class="btn btn-light">Change User Data</a>
 </div>
 {% endblock %}
