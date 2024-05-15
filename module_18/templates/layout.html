@@ -12,10 +12,13 @@
     <nav class="nav justify-content-center m-3">
         <ul class="nav justify-content-center">
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">BlogProject</a>
+                <a class="nav-link active" aria-current="page" href="#">{% block pagetitle %}BlogProject{% endblock %}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'authors:register_user' %}">Register Author</a>
+                <a class="nav-link active" aria-current="page" href="{% url 'authors:register_author' %}">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'authors:login_author' %}">Login</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Link</a>
