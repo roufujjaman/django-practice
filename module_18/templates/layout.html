@@ -13,10 +13,10 @@
         {% if request.user.is_authenticated %}
         <ul class="nav justify-content-center">
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Profile</a>
+                <a class="nav-link active" aria-current="page" href="{% url 'authors:profile' %}">Profile</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'authors:register_author' %}">Post</a>
+                <a class="nav-link active" aria-current="page" href="#">Post</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="{% url 'authors:logout_author' %}">Logout</a>
@@ -36,6 +36,13 @@
         </ul>
         {% endif %}
     </nav>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="mx-auto alert alert-secondary " role="alert" style="width: 50%;">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
     <div>
         {% block content %}
             

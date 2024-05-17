@@ -11,5 +11,8 @@
             {{ form | crispy }}
             <button class="btn btn-secondary">Submit</button>
         </form>
+        {% if extras %}
+            <p><a href="{{ extras.password.1 }}">{{ extras.password.0 }}</a></p>
+        {% endif %}
     </div>
 {% endblock %}
