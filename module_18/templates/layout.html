@@ -9,35 +9,33 @@
 </head>
 
 <body>
-    {% if request.user.is_authenticated %}
-        <nav class="nav justify-content-center m-3">
-            <ul class="nav justify-content-center">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'authors:register_author' %}">Post</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'authors:logout_author' %}">Logout</a>
-                </li>
-            </ul>
-        </nav>
-    {% else %}
-        <nav class="nav justify-content-center m-3">
-            <ul class="nav justify-content-center">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">BlogProject</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'authors:register_author' %}">Register</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'authors:login_author' %}">Login</a>
-                </li>
-            </ul>
-        </nav>
-    {% endif %}
+    <nav class="nav justify-content-center m-3">
+        {% if request.user.is_authenticated %}
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'authors:register_author' %}">Post</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'authors:logout_author' %}">Logout</a>
+            </li>
+        </ul>
+        {% else %}
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">BlogProject</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'authors:register_author' %}">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'authors:login_author' %}">Login</a>
+            </li>
+        </ul>
+        {% endif %}
+    </nav>
     <div>
         {% block content %}
             

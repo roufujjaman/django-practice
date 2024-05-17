@@ -30,8 +30,7 @@ def login_user(request):
             user = authenticate(username=user_name, password=user_pass)
             if user is not None:
                 login(request, user)
-                print('logged in')
-                messages.success(request, 'Logged In Successfully')
+                # messages.success(request, 'Logged In Successfully')
                 return redirect('home')
     else:
         form = AuthenticationForm()
