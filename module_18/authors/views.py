@@ -58,9 +58,6 @@ def profile(request):
     return render(request, 'authors/author_forms.html', {
         'form': profile_form,
         'title': 'User Profile',
-        'extras': {
-            'password': ['Change Password', '{{ url author:password }}']
-        }
     })
 
 def change_password(request):
