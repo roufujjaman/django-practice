@@ -13,10 +13,16 @@
         {% if request.user.is_authenticated %}
         <ul class="nav justify-content-center">
             <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'home' %}">BlogProject</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="{% url 'authors:profile' %}">Profile</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'posts:add_post' %}">Post</a>
+                <a class="nav-link active" aria-current="page" href="{% url 'authors:posts' %}">My Post</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'posts:add' %}">New Post</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="{% url 'authors:password' %}">Password</a>
@@ -28,7 +34,7 @@
         {% else %}
         <ul class="nav justify-content-center">
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">BlogProject</a>
+                <a class="nav-link active" aria-current="page" href="{% url 'home' %}">BlogProject</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="{% url 'authors:register_author' %}">Register</a>

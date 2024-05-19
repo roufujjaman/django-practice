@@ -4,6 +4,7 @@ from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from posts.models import Post
 
 # Create your views here.
 
@@ -41,9 +42,10 @@ def login_user(request):
         'title': 'Author Login'
     })
 
+@login_required
 def logout_user(request):
     logout(request)
-    return redirect('home')
+    return redirect('authors:login_author')
 
 @login_required
 def profile(request):
@@ -60,6 +62,7 @@ def profile(request):
         'title': 'User Profile',
     })
 
+@login_required
 def change_password(request):
     if request.method == 'POST':
         password_form = PasswordChangeForm(request.POST, request.user)
@@ -74,4 +77,12 @@ def change_password(request):
     return render(request, 'authors/author_forms.html', {
         'form': password_form,
         'title': 'Change Password'
+    })
+
+@login_required
+def authors_posts(request):
+    all_post = Post.objects.filter(author=request.user)
+    return render(request, 'authors/all_post.html', {
+        'posts': all_post,
+        'title': 'My Posts'
     })
