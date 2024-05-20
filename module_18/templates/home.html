@@ -11,7 +11,7 @@
                 <p class="card-text">{{ post.author }}</p>
                 <p class="card-text">{{ post.content }}</p>
                 {% for category in post.category.all %}
-                <a class="btn btn-secondary mt-1" href="">{{ category }}</a>
+                <a href="{% url 'bycategory' category.slug %}" class="link-primary mt-1">{{ category }}</a>
                 {% endfor %}
             </div>
         </div>
