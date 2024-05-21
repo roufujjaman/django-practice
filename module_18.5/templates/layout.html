@@ -23,6 +23,7 @@
                     {% if user.is_authenticated %}
                         <a href="{% url 'profile' %}" class="btn btn-primary m-2">Profile</a>
                         <a href="{% url 'signout' %}" class="btn btn-primary m-2">Signout</a>
+                        <a href="{% url 'password' %}" class="btn btn-primary m-2">Password</a>
                     {% else %}
                         <a href="{% url 'signup' %}" class="btn btn-primary m-2">Signup</a>
                         <a href="{% url 'signin' %}" class="btn btn-primary m-2">Signin</a>

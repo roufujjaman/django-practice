@@ -10,4 +10,7 @@
             {{ form | crispy }}
             <button class="btn btn-secondary">Submit</button>
         </form>
+        {% if request.path == '/profile/' %}
+            <a href="{% url 'password' %}">Change Password</a>
+        {% endif %}
 {% endblock content %}

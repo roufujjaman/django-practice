@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from .forms import UserSignup, UserProfile
 from django.contrib.auth.forms import PasswordChangeForm, UserChangeForm, AuthenticationForm
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 def home(request):
     return render(request, 'home.html', {
@@ -40,11 +41,13 @@ def signin(request):
         'title': 'Create User'
     })
 
+@login_required
 def signout(request):
     logout(request)
     messages.success(request, 'Logged Out')
     return redirect('signin')
 
+@login_required
 def profile(request):
     if request.method == 'POST':
         profile_user_form = UserProfile(request.POST, instance=request.user)
@@ -62,12 +65,13 @@ def profile(request):
         'title': 'User Profile'
     })
 
-
+@login_required
 def password(request):
     if request.method == 'POST':
-        password_form = PasswordChangeForm(user=request.user)
+        password_form = PasswordChangeForm(user=request.user, data=request.POST)
         if password_form.is_valid():
             password_form.save()
+            update_session_auth_hash(request, password_form.user)
             return redirect('home')
     else:
         password_form = PasswordChangeForm(user=request.user)
