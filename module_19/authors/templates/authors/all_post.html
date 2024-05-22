@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="row row-cols-1 row-cols-md-2 g-4 mx-auto" style="width: 50%;">
+    {% for post in posts %}
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ post.title }}</h5>
+                <p class="card-text">{{ post.author }}</p>
+                <p class="card-text">{{ post.content }}</p>
+                {% for category in post.category.all %}
+                <a class="btn btn-secondary mt-1" href="">{{ category }}</a>
+                {% endfor %}
+                <br>
+                <a class="btn btn-primary mt-2" href="{% url 'posts:edit' post.id %}">Edit</a>
+                <a class="btn btn-danger mt-2" href="{% url 'posts:delete' post.id %}">Delete</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock  %}
