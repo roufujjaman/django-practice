@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+{% block title %}{{ title }}{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="mx-auto " style="width: 50%;">
+        <h3>{{ title }}</h3>
+        <h3>Are You Sure?</h3>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form | crispy }}
+            <button class="btn btn-danger">Delete</button>
+        </form>
+    </div>
+{% endblock %}
