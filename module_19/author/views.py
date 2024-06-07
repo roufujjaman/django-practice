@@ -18,7 +18,7 @@ class RegisterUserView(CreateView):
 
 def author_login(request):
     author_login_form = AuthenticationForm()
-    
+    print(request.headers) 
     if request.method == 'POST':
         author_login_form = AuthenticationForm(request=request, data=request.POST)
         if author_login_form.is_valid():
