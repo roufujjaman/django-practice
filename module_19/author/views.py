@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import CreateView
 from . import forms
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 
 
 
@@ -31,3 +31,7 @@ def author_login(request):
     return render(request, 'author/author_forms.html', {
         'form': author_login_form
     })
+
+
+def author_logout(request):
+    pass

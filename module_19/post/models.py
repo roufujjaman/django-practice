@@ -9,11 +9,15 @@ class Category(models.Model):
 
 
 class Post(models.Model):
-    title = models.CharField()
+    title = models.CharField(
+        max_length=150
+    )
     author = models.ForeignKey(
-        User
+        User,
+        on_delete=models.CASCADE
     )
     content = models.TextField()
     category = models.ForeignKey(
-        Category
+        Category,
+        on_delete=models.CASCADE
     )
