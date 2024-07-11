@@ -1,9 +1,11 @@
 {% extends 'layout.html' %}
+{% block title %}{{ title }}{% endblock %}
+
 {% load crispy_forms_tags %}
 
 {% block content %}
-
-    <div style="width: 50%; margin: auto;">
+    <div class="mx-auto " style="width: 50%;">
+        <h3>{{ title }}</h3>
         <form method="POST">
             {% csrf_token %}
             {{ form | crispy }}

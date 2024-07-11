@@ -1,5 +1,5 @@
 """
-URL configuration for ClassBassedViewProject project.
+URL configuration for BlogProject project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.0/topics/http/urls/
@@ -16,9 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('author/', include('author.urls'), name='author'),
-    
+    path('', views.home, name='home'),
+    path('category/<slug:cat>', views.home, name='bycategory'),
+    path('author/', include('authors.urls')),
+    path('post/', include('posts.urls')),
 ]
