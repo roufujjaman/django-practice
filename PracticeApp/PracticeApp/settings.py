@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-pu%s$lza*2=4f(9)wopoa8mzbu21(z^xtqn_mj8xo8y#ihc7!n'
+SECRET_KEY = 'django-insecure-*cxp5+m=pkf&p17y7pbp7ecog)qm*m9lche$(t7db7r=^x5dh4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'problems'
 ]
 
 MIDDLEWARE = [
@@ -55,7 +54,7 @@ ROOT_URLCONF = 'PracticeApp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
