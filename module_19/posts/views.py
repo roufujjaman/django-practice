@@ -3,6 +3,8 @@ from .forms import PostForm
 from .models import Post
 from django.contrib.auth.decorators import login_required
 
+from django.views.generic import CreateView
+from django.urls import reverse_lazy
 # Create your views here.
 
 @login_required
@@ -20,6 +22,16 @@ def add_post(request):
         'form': post_form,
         'title': 'Add Post'
     })
+# add post using class based view
+class AddPostCreateView(CreateView):
+    model = Post
+    form_class = PostForm
+    template_name = 'posts/post_form.html'
+    success_url = reverse_lazy('authors:posts')
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
 
 @login_required
 def edit_post(request, id):

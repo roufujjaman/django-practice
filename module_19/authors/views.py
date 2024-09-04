@@ -33,7 +33,7 @@ def login_user(request):
             if user is not None:
                 login(request, user)
                 # messages.success(request, 'Logged In Successfully')
-                return redirect('profile')
+                return redirect('home')
     else:
         form = AuthenticationForm()
     
