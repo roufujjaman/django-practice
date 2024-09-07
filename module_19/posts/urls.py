@@ -5,5 +5,6 @@ app_name = 'posts'
 urlpatterns = [
     path('add/', views.AddPostCreateView.as_view(), name='add'),
     path('edit/<int:id>/', views.EditPostView.as_view(), name='edit'),
-    path('delete/<int:id>/', views.DeletePostView.as_view(), name='delete')
+    path('delete/<int:id>/', views.DeletePostView.as_view(), name='delete'),
+    path('detail/<int:id>/', views.PostDetailView.as_view(), name='detail')
 ]

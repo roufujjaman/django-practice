@@ -3,7 +3,7 @@ from .forms import PostForm
 from .models import Post
 from django.contrib.auth.decorators import login_required
 
-from django.views.generic import CreateView, UpdateView, DeleteView
+from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 # Create your views here.
@@ -69,3 +69,8 @@ class DeletePostView(DeleteView):
     template_name = 'posts/post_confirm_delete.html'
     pk_url_kwarg = 'id'
     success_url = reverse_lazy('authors:posts')
+
+class PostDetailView(DetailView):
+    model = Post
+    pk_url_kwarg = 'id'
+    template_name = 'posts/post_detail.html'
