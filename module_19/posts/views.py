@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import PostForm
+from .forms import PostForm, CommentForm
 from .models import Post
 from django.contrib.auth.decorators import login_required
 
@@ -74,3 +74,21 @@ class PostDetailView(DetailView):
     model = Post
     pk_url_kwarg = 'id'
     template_name = 'posts/post_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        post = self.object
+        comment = post.comments
+
+        if self.request.method == 'POST':
+            comment_form = CommentForm(date=self.request.POST)
+            if comment_form.is_valid():
+                new_comment = comment_form.save(commit=False)
+                new_comment.post = post
+                new_comment.save()
+        else:
+            comment_form = CommentForm()
+        
+        context['comments'] = comment
+        context['comment_form'] = comment_form
+        return context

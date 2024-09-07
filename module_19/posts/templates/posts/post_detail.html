@@ -11,6 +11,15 @@
         {% for category in post.category.all %}
         <a href="{% url 'bycategory' category.slug %}" class="link-primary mt-1">{{ category }}</a>
         {% endfor %}
+        <div class="card-body">
+            {% for comment in comments %}
+                <p>{{ comment.name }}</p>
+                <p>{{ comment.body }}</p>
+            {% endfor %}
+            <form action="">
+                {{ comment_form }}
+            </form>
+        </div>
     </div>
 </div>
 <hr>
