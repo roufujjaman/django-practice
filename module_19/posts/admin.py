@@ -9,3 +9,4 @@ class CategoryAdmin(admin.ModelAdmin):
 
 admin.site.register(models.Category, CategoryAdmin)
 admin.site.register(models.Post)
+admin.site.register(models.Comment)

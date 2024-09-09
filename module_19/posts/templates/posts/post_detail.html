@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-
+{% load crispy_forms_tags %}
 {% block content %}
 <div class="row row-cols-1 row-cols-md-2 g-4 mx-auto" style="width: 50%;">
     <div class="card-body">
@@ -12,12 +12,15 @@
         <a href="{% url 'bycategory' category.slug %}" class="link-primary mt-1">{{ category }}</a>
         {% endfor %}
         <div class="card-body">
-            {% for comment in comments %}
-                <p>{{ comment.name }}</p>
-                <p>{{ comment.body }}</p>
+            {% for comment in comments.all %}
+            <p>{{ comment.name }}</p>
+            <p>{{ comment.email }}</p>
+            <p>{{ comment.body }}</p>
             {% endfor %}
-            <form action="">
-                {{ comment_form }}
+            <form method="POST">
+                {% csrf_token %}
+                {{ comment_form | crispy }}
+                <button class="btn btn-primary">Submit</button>
             </form>
         </div>
     </div>
