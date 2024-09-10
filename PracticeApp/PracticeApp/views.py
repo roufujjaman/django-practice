@@ -33,3 +33,14 @@ def signin(request):
     return render(request, 'user.html', {
         'form': user_form
     })
+
+def set_cookie(request, name):
+    response = render(request, 'layout.html')
+    response.set_cookie('name', name)
+    return response
+
+def get_cookie(request):
+    data = request.COOKIES.get('name')
+    return render(request, 'cookie.html', {
+        'cookie_data': data
+        })

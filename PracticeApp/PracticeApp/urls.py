@@ -21,5 +21,8 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('signup/', views.signup, name='signup'),
-    path('signin/', views.signin, name='signin')
+    path('signin/', views.signin, name='signin'),
+    path('set_cookie/<str:name>/', views.set_cookie),
+    path('get_cookie/', views.get_cookie)
+
 ]
