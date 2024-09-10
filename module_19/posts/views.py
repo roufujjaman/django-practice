@@ -77,18 +77,21 @@ class PostDetailView(DetailView):
 
     def post(self, request, *args, **kwargs):
         comment_form = CommentForm(data=self.request.POST)
-        post = self.get_object()
-        if comment_form.is_valid():
-            new_comment = comment_form.save()
-            new_comment.post = post
-            new_comment.save()
-            return self.get(request, *args, *kwargs)
 
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.post = self.get_object() 
+            
+            comment.save()
+
+        return self.get(request, *args, **kwargs)
+
+        
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        post = self.object
-        comment = post.comments
+        comments = 'test_comments'
 
-        context['comments'] = comment
+        context['comments'] = self.get_object().comments.all()
         context['comment_form'] = CommentForm()
         return context
+    

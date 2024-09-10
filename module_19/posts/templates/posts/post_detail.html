@@ -12,10 +12,13 @@
         <a href="{% url 'bycategory' category.slug %}" class="link-primary mt-1">{{ category }}</a>
         {% endfor %}
         <div class="card-body">
-            {% for comment in comments.all %}
-            <p>{{ comment.name }}</p>
-            <p>{{ comment.email }}</p>
-            <p>{{ comment.body }}</p>
+            <p>Total Comments: {{ comments | length }} </p>
+            {% for comment in comments %}
+            <div class="border px-2 mt-2">
+                <p>Name: {{ comment.name }}</p>
+                <p>Email: {{ comment.email }}</p>
+                <p>Comment: {{ comment.body }}</p>
+            </div>
             {% endfor %}
             <form method="POST">
                 {% csrf_token %}
