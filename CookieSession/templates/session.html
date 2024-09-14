@@ -1,0 +1,7 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <p>{{ action }}</p>
+    {% for key, val in session %}
+        <p>{{ key }}: {{ val }}</p>
+    {% endfor %} 
+{% endblock %}
