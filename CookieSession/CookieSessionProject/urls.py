@@ -1,5 +1,5 @@
 """
-URL configuration for PracticeApp project.
+URL configuration for CookieSessionProject project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.0/topics/http/urls/
@@ -20,11 +20,8 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('signup/', views.signup, name='signup'),
-    path('signin/', views.signin, name='signin'),
-    path('set_cookie/<str:name>/', views.set_cookie),
-    path('get_cookie/', views.get_cookie),
-    path('del_cookie/<str:name>/', views.del_cookie),
-    path('set_session/<str:name>/<int:age>/<str:language>/', views.set_session)
-
+    path('set_cookie/<str:ckey>/<str:cval>/<int:days>', views.set_cookie, {'days': 7}, name='set_cookie'),
+    path('get_cookie/', views.get_cookie, name='get_cookie'),
+    path('del_cookie/<str:name>', views.delete_cookie, name='delete_cookie'),
+    path('default/<str:name>/', views.default)
 ]

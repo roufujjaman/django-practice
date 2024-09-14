@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COOKIE AND SESSION</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: blue;
+            display: flex;
+            justify-content: center;
+        }
+
+        table {
+            width: 100%;
+        }
+        th {
+            text-align: left;
+        }
+        td {
+            text-align: left;
+            padding-right: 1rem;
+        }
+        th, td {
+            border-bottom: 1px solid grey;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        {% block content %}
+        {% endblock content %}
+    </div>
+</body>
+
+</html>

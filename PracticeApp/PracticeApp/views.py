@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate
+from datetime import datetime, timedelta
 
 def signup(request):
     if request.method == 'POST':
@@ -35,12 +36,24 @@ def signin(request):
     })
 
 def set_cookie(request, name):
-    response = render(request, 'layout.html')
-    response.set_cookie('name', name)
+    response = render(request, 'cookie.html') 
+    response.set_cookie('name', name, expires=datetime.now()+timedelta(days=5))
     return response
 
 def get_cookie(request):
-    data = request.COOKIES.get('name')
-    return render(request, 'cookie.html', {
-        'cookie_data': data
-        })
+    name = request.COOKIES.get('name')
+    return render(request, 'cookie.html', {'cookie_data': name})
+
+def del_cookie(request, name):
+    response = render(request, 'cookie.html')
+    response.delete_cookie(name)
+    return response
+
+def set_session(request, name, age, language):
+    data = {
+        'name': name,
+        'age': age,
+        'language': language
+    }
+    request.session.update(data)
+    return render(request, 'session.html')

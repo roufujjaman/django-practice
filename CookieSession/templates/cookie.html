@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+
+
+{% block content %}
+    <p>{{ action }}</p>
+    {% if cookies %}
+        <table>
+            <th>Name</th>
+            <th>Value</th>
+            <th>Action</th>
+            {% for key, value in cookies.items %}
+                <tr>
+                    <td>{{ key }}</td>
+                    <td>{{ value }}</td>
+                    <td><a href="{% url 'delete_cookie' key %}">Delete</a></td>
+                </tr>    
+            {% endfor %}
+        </table>
+    {% endif %}
+{% endblock %}
