@@ -1,8 +1,13 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-
+from django.views.generic import TemplateView
+from django.contrib.auth.decorators import login_required
+from . import models
 # Create your views here.
-def home(request):
-    response = HttpResponse("working")
-    response.set_cookie('time', 'set', max_age=60)
-    return response
+
+
+
+class Home(TemplateView):
+    template_name = 'musicians/musicians.html'
+    extra_context = {
+        'musicians': models.Musicians.objects.all()
+    }
