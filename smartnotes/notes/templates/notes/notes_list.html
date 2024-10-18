@@ -3,15 +3,14 @@
 
 {% block content %}
         <h3 class="my-5">All Notes</h3>
-
         <div class="row row-cols3 g-2">
             {% for note in notes %}
             <div class="col">
                 <div class="p-1 border">
-                    <a href="{% url 'notes.detail' pk=note.id %}" class="text-dark text-decoration-none">
-                        <h5 class="note_li">{{ note.title }}</h5>
+                    <a href="{% url 'notes.detail' pk=note.id %}" class="text-dark">
+                        <h5>{{ note.title }}</h5>
                     </a>
-                    <p>{{ note.title | truncatechars:10 }}</p>
+                    <p>{{ note.text | truncatechars:10 }}</p>
                 </div>
             </div>
             {% endfor %}
