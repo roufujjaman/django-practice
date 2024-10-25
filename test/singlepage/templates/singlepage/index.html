@@ -10,28 +10,28 @@
         }
     </style>
     <script>
-
-        window.onpopstate = function(event){
-            console.log(event.state.section);
-            showSection(event.state.section)
-        }
-        function showSection(section) {
+        function showSection(section){
             fetch(`section/${section}`)
             .then(response => response.text())
             .then(text => {
-                console.log(text)
-                document.querySelector("#content").innerHTML = text
+                console.log(text);
+                document.querySelector("#content").innerHTML = `${section} ${text}`
             })
-        };
-        document.addEventListener("DOMContentLoaded", function(){
+        }
+        document.addEventListener("DOMContentLoaded", function() {
             document.querySelectorAll("button").forEach(button => {
+                // const section = button.dataset.section
                 button.onclick = function() {
                     const section = this.dataset.section
-                    history.pushState({section: section}, "", `section${section}`)
                     showSection(section)
+                    history.pushState({"s": section}, section, `section${section}`)
                 }
             })
-        });
+        })
+        window.onpopstate = function(event) {
+            console.log(event.state.section);
+            showSection(event.state.s)
+        }
     </script>
 </head>
 <body>

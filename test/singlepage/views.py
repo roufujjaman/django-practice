@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, JsonResponse
+import time
 
 # Create your views here.
 def index(request):
@@ -23,3 +24,33 @@ def section(request, num):
         return HttpResponse(texts[num - 1])
     else:
         raise Http404("No such section")
+    
+
+def scroll(request):
+    return render(request, "singlepage/scroll.html")
+
+
+def post(request):
+    
+    start = int(request.GET.get("start", 0))
+    end = int(request.GET.get("end", 9))
+
+    data = []
+
+    for i in range(start, end + 1):
+        data.append(f"This is post {i}")
+
+    time.sleep(1)
+
+    return JsonResponse({
+        "posts": data
+    })
+
+
+def animation(request):
+    return render(request, "singlepage/animation.html")
+
+
+
+def react(request):
+    return render(request, "singlepage/react.html")
