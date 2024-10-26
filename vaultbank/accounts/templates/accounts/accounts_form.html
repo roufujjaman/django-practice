@@ -1,9 +1,21 @@
 <html>
     <body>
-        <form action="">
-            {{ user.firstname }}
-            {{ accounts_form.as_p }}
-            {{ address_form.as_p }}
-        </form>
+        <style>
+            div {
+                width: 50vw;
+                margin: auto;
+                font-family: Arial, Helvetica, sans-serif;
+                padding: 2rem;
+            }
+        </style>
+        <div>
+            <form method="POST">
+                {% csrf_token %}
+                {{ UserForm.as_p }}
+                {{ AccountsForm.as_p }}
+                {{ AddressForm.as_p }}
+                <button>Submit</button>
+            </form>
+        </div>
     </body>
 </html>

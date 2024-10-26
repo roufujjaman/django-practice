@@ -14,9 +14,8 @@ GENDER_TYPE = (
 )
 
 class Accounts(models.Model):
-    # one user can have multiple account
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="accounts")
-
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="accounts")
+    
     account_no = models.IntegerField(unique=True)
     account_type = models.CharField(max_length=20, choices=ACCOUNT_TYPE)
     birth_date = models.DateField()
@@ -31,10 +30,12 @@ class Accounts(models.Model):
 
 
 class Address(models.Model):
-    # one user will have only one address
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="address")
-
+    
     street = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
     postal_code = models.IntegerField()
     country = models.CharField(max_length=100)
+
+    class Meta:
+        verbose_name_plural = "Address"
