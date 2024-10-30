@@ -20,5 +20,6 @@ from services import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('service', views.all_categoreis, name="all_categories")
+    path('services/categories', views.all_categoreis, name="all_categories"),
+    # path('service/categories/<int:pk>', views.sub_categories)
 ]

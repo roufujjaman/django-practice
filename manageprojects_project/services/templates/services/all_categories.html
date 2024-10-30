@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Categories</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+        table {
+            border-collapse: collapse;
+            margin: auto;
+            width: 60vw;
+        }
+        .title {
+            margin: auto;
+            width: 60vw;
+            /* background-color: #0D92F4; */
+            text-align: center;
+        }
+        th {
+            text-align: left;
+            padding: 10px;
+        }
+        td {
+            text-align: left;
+            padding: 10px;
+        }
+        tr:hover {
+            background-color: rgb(235, 235, 235);
+            cursor: pointer;
+        }
+        th, td {
+            border-bottom: 1px solid #ddd;
+        }
+        .center {
+            text-align: center;
+            margin: auto;
+        }
+        .completed {
+            display: inline-block;
+            padding: 8px;
+            border-radius: 4px;
+            background-color: #c8f1da;
+            color: #5bcf57;
+        }
+
+        .incomplete {
+            display: inline-block;
+            padding: 8px;
+            border-radius: 4px;
+            background-color: #ffbac3;
+            color: #d3354a;
+        }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+    <div class="title">Scope of Work</div>
+    <table>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        {% for category in categories %}
+            <tr>
+                {% if category.order|divisibleby:"2" %}
+                        <td class="center"><p class="completed">completed</p></td>
+                {% else %}
+                        <td class="center"><p class="incomplete">incomplete</p></td>
+                {% endif %}
+
+                <td>{{ category.order }}</td>
+                <td>{{ category.name }}</td>
+                <td>{{ category.duration_days_default }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <script type="text/babel">
+        
+        function App(){
+            return (
+                <div>Hello, From React</div>
+            );
+        };
+
+        ReactDOM.render(<App />, document.querySelector('#app'));
+    </script>
+</body>
+</html>
