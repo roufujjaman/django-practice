@@ -1,0 +1,42 @@
+* {
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+form {
+  text-align: left;
+}
+
+input {
+  width: 100%;
+  margin: 5px 0;
+  border: none;
+  background-color: rgb(235, 235, 235);
+  padding: 10px;
+  outline: 1px solid transparent;
+  border-radius: 1px;
+  transition: outline-color 0.4s;
+}
+
+input:focus {
+  outline-color: rgb(52, 64, 175);
+}
+
+button {
+  background-color: hsl(0, 0%, 98%);
+  padding: 10px 25px;
+  border: 1.5px solid transparent;
+  border-radius: 3px;
+  transition: border-color 0.2s;
+}
+
+button:hover {
+  border-color: rgb(112, 112, 112);
+}
+
+.success {
+  color: rgb(80, 165, 0);
+  background-color: rgb(160, 255, 136);
+  padding: 5px;
+}
