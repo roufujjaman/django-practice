@@ -2,7 +2,6 @@ from typing import Any
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.http import JsonResponse
 
 from .models import Accounts, Address
 
@@ -28,16 +27,16 @@ class UserForm(UserCreationForm):
         self.fields["first_name"].required = True
         self.fields["last_name"].required = True
 
+
 class AccountsForm(forms.ModelForm):
     class Meta:
         model = Accounts
         # fields = "__all__"
         exclude = ["user", "account_no"]
+        widgets = {
+            "birth_date": forms.DateInput(attrs={"type": "date"})
+        } 
 
-    # def save(self, commit=True):
-    #     instance = super().save(commit=False)
-    #     if commit:
-            
 
 
 class AddressForm(forms.ModelForm):

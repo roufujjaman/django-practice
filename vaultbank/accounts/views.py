@@ -3,22 +3,43 @@ from .forms import UserForm, AccountsForm, AddressForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.http import JsonResponse
 
 def create_account(request):
     user_form = UserForm()
+    accounts_form = AccountsForm()
+    address_form = AddressForm()
 
     if request.method == "POST":
         user_form = UserForm(request.POST)
-        if user_form.is_valid():
+        accounts_form = AccountsForm(request.POST)
+        address_form = AddressForm(request.POST)
+        if all([user_form.is_valid(), accounts_form.is_valid(), address_form.is_valid()]):
+            user = user_form.save(commit=False)
+
+            accounts_form.instance.user = user
+            accounts_form.instance.account_no = int(user.id) + 1000
+            address_form.instance.user = user
+
             user_form.save()
-            messages.success(request, "Account Created Successfully")    
-        else:
-            errors = user_form.errors.as_json()
-            return JsonResponse({"errors": errors}, status=400)
+            accounts_form.save()
+            address_form.save()
+
+            username = request.POST["username"]
+            password = request.POST["password1"]
+
+            user = authenticate(request, username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+
+
+            
+            messages.success(request, "Account Created Successfully")
 
     return render(request, "accounts/accounts_form.html", {
-        "UserForm": user_form
+        "UserForm": user_form,
+        "AccountsForm": accounts_form,
+        "AddressForm": address_form
     })
 
 

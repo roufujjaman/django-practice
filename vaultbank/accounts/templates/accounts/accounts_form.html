@@ -3,24 +3,45 @@
     <h1>{{ user.first_name }}</h1>
     <div style="width: 50%; margin: auto; padding: 25px;">
         <h1>Create Account</h1>
+        {% for message in messages %}
+        <p class="message success">{{ message }}</p>
+        {% endfor %}
         <form method="POST" novalidate>
             {% csrf_token %}
-            {% for message in messages %}
-                <p class="success">{{ message }}</p>
-            {% endfor %}
-
+            
+            <!-- form 1 - UserForm -->
             {% for field in UserForm %}
-                {{ field.errors }}
                 {{ field.label_tag }}
+            
+                {% for err in field.errors %}
+                <p class="message error">{{ err }}</p>
+                {% endfor %}
+            
                 {{ field }}
             {% endfor %}
+            <br><br><br>
 
-            <hr style="width: 100%; padding: 0; margin: 0;">
+            <!-- form 2 - AccountsForm -->
+            {% for field in AccountsForm %}
+                {{ field.label_tag }}
+                {% for err in field.errors %}
+                <p class="message error ">{{ err }}</p>
+                {% endfor %}
 
-                <br><br><br><br><br><br>
-                <!-- {{ UserForm }} -->
-                <!-- {{ AccountsForm }} -->
-            <!-- {{ AddressForm }} -->
+                {{ field }}
+            {% endfor %}
+            <br><br><br>
+
+            <!-- form 3 - AddressForm -->
+            {% for field in AddressForm %}
+                {{ field.label_tag }}
+                {% for err in field.errors %}
+                <p class="message error ">{{ err }}</p>
+                {% endfor %}
+
+                {{ field }}
+            {% endfor %}
+            <br>
             <button>Submit</button>
         </form>
     </div>
