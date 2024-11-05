@@ -5,17 +5,6 @@ from django.contrib.auth.models import User
 
 from .models import Accounts, Address
 
-ACCOUNT_TYPE = (
-    ("savings", "savings"),
-    ("current", "current")
-)
-
-GENDER_TYPE = (
-    ("male", "male"),
-    ("female", "female"),
-    ("other", "other")
-)
-
 class UserForm(UserCreationForm):
     class Meta:
         model = User
@@ -32,7 +21,7 @@ class AccountsForm(forms.ModelForm):
     class Meta:
         model = Accounts
         # fields = "__all__"
-        exclude = ["user", "account_no"]
+        exclude = ["user", "account_no", "balance"]
         widgets = {
             "birth_date": forms.DateInput(attrs={"type": "date"})
         } 

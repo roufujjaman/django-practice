@@ -1,8 +1,11 @@
 from django.shortcuts import render, HttpResponse
 from .forms import UserForm, AccountsForm, AddressForm
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+
+from .models import Accounts, Address
 
 def create_account(request):
     user_form = UserForm()
@@ -14,7 +17,7 @@ def create_account(request):
         accounts_form = AccountsForm(request.POST)
         address_form = AddressForm(request.POST)
         if all([user_form.is_valid(), accounts_form.is_valid(), address_form.is_valid()]):
-            user = user_form.save(commit=False)
+            user = user_form.save(commit=True)
 
             accounts_form.instance.user = user
             accounts_form.instance.account_no = int(user.id) + 1000
@@ -52,3 +55,15 @@ def testpost(request):
         print(request.POST)
     
     return render(request, "accounts/post_test.html")
+
+def edit(request, id):
+
+    user_form = UserForm(instance=User.objects.get(pk=id))
+    accounts_form = AccountsForm(instance=Accounts.objects.get(pk=id))
+    address_form = AddressForm(instance=Address.objects.get(pk=id))
+    
+    return render(request, "accounts/accounts_form.html", {
+        "UserForm": user_form,
+        "AccountsForm": accounts_form,
+        "AddressForm": address_form
+    })

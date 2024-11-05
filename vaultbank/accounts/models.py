@@ -3,8 +3,8 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 ACCOUNT_TYPE = (
-    ("savings", "savings"),
-    ("current", "current")
+    ("savings", "Savings"),
+    ("current", "Current")
 )
 
 GENDER_TYPE = (
