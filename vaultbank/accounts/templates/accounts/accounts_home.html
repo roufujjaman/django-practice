@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <h1>Account</h1>
+  
+  
+  <h3>{{ user.first_name }} {{ user.last_name }}</h3>
+
+    <p>{{ user.accounts.account_no }}</p>
+    <p>{{ user.accounts.account_type }}</p>
+    <p>BDT {{ user.accounts.balance }}</p>
+
+    <p>{{ user.address.street }}</p>
+
+{% endblock %}

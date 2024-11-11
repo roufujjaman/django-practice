@@ -10,28 +10,28 @@ form {
 }
 
 .form-container {
-  background-color: hsl(78, 100%, 96%);
+  background-color: hsl(0, 0%, 90%);
   width: 50%;
   margin: 100px auto;
   padding: 25px;
 }
 
 
-input, select {
+input,
+select {
   display: block;
   width: 100%;
   margin: 5px 0;
   border: none;
-  background-color: hsl(78, 100%, 87%);
   padding: 15px;
-  outline: 1px solid transparent;
+  outline: 1.5px solid transparent;
   border-radius: 10px;
-  transition: outline-color .5s ease,  background-color 1s ease;
+  transition: outline-color .5s ease, background-color 1s ease;
 }
 
-input:focus, select:focus {
-  outline-color: hsl(78, 65%, 72%);
-  background-color: hsl(78, 100%, 92%);
+input:focus,
+select:focus {
+  outline-color: hsl(0, 0%, 76%);
 }
 
 button {
@@ -66,4 +66,39 @@ button:hover {
 label {
   display: inline-block;
   padding: 5px 0;
+}
+
+
+
+
+
+/* notification */
+
+@keyframes pop {
+  0% {
+    scale: .5;
+  }
+
+  100% {
+    scale: 1;
+  }
+}
+
+.pop-notification {
+  position: fixed;
+  top: 15px;
+  left: 0;
+  right: 0;
+  width: 15vw;
+  margin: auto;
+
+  background-color: rgb(90, 236, 139);
+  color: aliceblue;
+  text-align: center;
+
+  padding: 10px;
+  border-radius: 25px;
+  animation-name: pop;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
 }

@@ -1,11 +1,19 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 from .forms import UserForm, AccountsForm, AddressForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.contrib.auth.forms import AuthenticationForm
 
 from .models import Accounts, Address
+
+
+@login_required(redirect_field_name="login")
+def home_account(request):
+    account = Accounts.objects.filter(user=request.user)
+    return render(request, "accounts/accounts_home.html", 
+                  {"account": account})
 
 def create_account(request):
     user_form = UserForm()
@@ -35,9 +43,9 @@ def create_account(request):
             if user is not None:
                 login(request, user)
 
-
-            
             messages.success(request, "Account Created Successfully")
+
+            return redirect("authorized")
 
     return render(request, "accounts/accounts_form.html", {
         "UserForm": user_form,
@@ -46,17 +54,7 @@ def create_account(request):
     })
 
 
-@login_required
-def authorized(request):
-    return HttpResponse("User Authenticated")
-
-def testpost(request):
-    if request.method == "POST":
-        print(request.POST)
-    
-    return render(request, "accounts/post_test.html")
-
-def edit(request, id):
+def edit_account(request, id):
 
     user_form = UserForm(instance=User.objects.get(pk=id))
     accounts_form = AccountsForm(instance=Accounts.objects.get(pk=id))
@@ -67,3 +65,30 @@ def edit(request, id):
         "AccountsForm": accounts_form,
         "AddressForm": address_form
     })
+
+
+
+
+def login_account(request):
+    if request.method == "POST":
+        user_form = AuthenticationForm(request, request.POST)
+        if user_form.is_valid():
+            username = user_form.cleaned_data["username"]
+            password = user_form.cleaned_data["password"]
+
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                print("looged in")
+                return redirect("")
+
+
+    return render(request, "accounts/authentication_form.html", {
+        "LoginForm": AuthenticationForm
+    })
+
+def logout_account(reqeust):
+    logout(request=reqeust)
+
+    return redirect("login")
+

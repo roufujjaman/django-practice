@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+    <div class="form-container">
+        <form method="POST">
+            {% csrf_token %}
+            {% for field in LoginForm %}
+                {{ field.label }}
+                {% for error in field.errors %}
+                    <p class="message error">{{ error }}</p>
+                {% endfor %}
+                {{ field }}
+            {% endfor %}
+            <button>Submit</button>
+        </form>
+    </div>
+{% endblock %}
