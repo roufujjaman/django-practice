@@ -19,6 +19,7 @@ class Projects(models.Model):
 
 class Phases(models.Model):
     title = models.CharField(max_length=50)
+    
 
 # idea 
 # flags for all services for example fire drawing, plumbing, structure

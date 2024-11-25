@@ -1,104 +1,36 @@
-* {
-  font-family: Arial, Helvetica, sans-serif;
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-
-form {
-  text-align: left;
-}
-
-.form-container {
-  background-color: hsl(0, 0%, 90%);
-  width: 50%;
-  margin: 100px auto;
-  padding: 25px;
-}
-
-
-input,
-select {
-  display: block;
-  width: 100%;
-  margin: 5px 0;
-  border: none;
-  padding: 15px;
-  outline: 1.5px solid transparent;
-  border-radius: 10px;
-  transition: outline-color .5s ease, background-color 1s ease;
-}
-
-input:focus,
-select:focus {
-  outline-color: hsl(0, 0%, 76%);
-}
-
-button {
-  background-color: hsl(0, 0%, 98%);
-  padding: 10px 25px;
-  margin: 20px 0;
-  border: 1.5px solid transparent;
-  border-radius: 3px;
-  transition: border-color 0.2s;
-}
-
-button:hover {
-  border-color: rgb(112, 112, 112);
-}
-
-.message {
-  display: inline-block;
-  padding: 3px;
-  border-radius: 5px;
-}
-
-.success {
-  color: rgb(80, 165, 0);
-  background-color: rgb(160, 255, 136);
+.strong {
+  color: blue;
+  font-size: 1.5rem;
 }
 
 .error {
-  background-color: rgb(255, 205, 205);
-  color: rgb(230, 70, 70);
-}
-
-label {
-  display: inline-block;
-  padding: 5px 0;
+  color: blue;
+  font-size: .75rem;
+  padding-bottom: 0.5rem;
 }
 
 
 
 
 
-/* notification */
-
-@keyframes pop {
-  0% {
-    scale: .5;
-  }
-
-  100% {
-    scale: 1;
-  }
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  /* margin: 1rem; */
 }
 
-.pop-notification {
-  position: fixed;
-  top: 15px;
-  left: 0;
-  right: 0;
-  width: 15vw;
-  margin: auto;
+input, select {
+  padding: .5rem;
+  margin: .5rem 0;
+}
 
-  background-color: rgb(90, 236, 139);
-  color: aliceblue;
-  text-align: center;
 
-  padding: 10px;
-  border-radius: 25px;
-  animation-name: pop;
-  animation-duration: 1s;
-  animation-fill-mode: forwards;
+
+button {
+  background-color: blue;
+  color: white;
+  font-size: 1rem;
+  padding: 1rem;
+  border: none;
 }

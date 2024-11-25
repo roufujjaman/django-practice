@@ -24,7 +24,7 @@
                 button.onclick = function() {
                     const section = this.dataset.section
                     showSection(section)
-                    history.pushState({"s": section}, section, `section${section}`)
+                    history.pushState({"s": section}, section, `section-${section}`)
                 }
             })
         })

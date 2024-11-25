@@ -1,53 +1,50 @@
 {% extends "layout.html" %}
+
+{% block title %}
+Create Account
+{% endblock %}
+
+
 {% block body %}
-    {{ user.first_name }}
-    {% for message in messages %}
-    <div class="pop-notification">
-        <p>{{ message }}</p>
-    </div>
-    {% endfor %}
-
-    <div class="form-container">
-        <h1>Create Account</h1>
-
-
-        <form method="POST" novalidate>
+        <form method="POST" novalidate class="form-container">
             {% csrf_token %}
             
             <!-- form 1 - UserForm -->
             {% for field in UserForm %}
                 {{ field.label_tag }}
             
+                
+                {{ field }}
+
                 {% for err in field.errors %}
                 <p class="message error">{{ err }}</p>
                 {% endfor %}
-            
-                {{ field }}
             {% endfor %}
-            <br><br><br>
+            <br><hr><br> 
 
             <!-- form 2 - AccountsForm -->
             {% for field in AccountsForm %}
                 {{ field.label_tag }}
-                {% for err in field.errors %}
-                <p class="message error ">{{ err }}</p>
-                {% endfor %}
-
+                
                 {{ field }}
+
+                {% for err in field.errors %}
+                <p class="message error">{{ err }}</p>
+                {% endfor %}
             {% endfor %}
-            <br><br><br>
+            <br><hr><br>
 
             <!-- form 3 - AddressForm -->
             {% for field in AddressForm %}
                 {{ field.label_tag }}
-                {% for err in field.errors %}
-                <p class="message error ">{{ err }}</p>
-                {% endfor %}
-
+                
                 {{ field }}
+
+                {% for err in field.errors %}
+                <p class="message error">{{ err }}</p>
+                {% endfor %}
             {% endfor %}
             <br>
             <button>Submit</button>
         </form>
-    </div>
 {% endblock %}
