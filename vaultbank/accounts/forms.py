@@ -3,7 +3,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
-from .models import Accounts, Address
+from .models import Account, Address
 
 class UserForm(UserCreationForm):
     class Meta:
@@ -17,9 +17,9 @@ class UserForm(UserCreationForm):
         self.fields["last_name"].required = True
 
 
-class AccountsForm(forms.ModelForm):
+class AccountForm(forms.ModelForm):
     class Meta:
-        model = Accounts
+        model = Account
         # fields = "__all__"
         exclude = ["user", "account_no", "balance"]
         widgets = {

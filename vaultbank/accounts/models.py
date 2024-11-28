@@ -13,7 +13,7 @@ GENDER_TYPE = (
     ("other", "other")
 )
 
-class Accounts(models.Model):
+class Account(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="accounts")
     
     account_no = models.IntegerField(unique=True)
