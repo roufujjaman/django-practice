@@ -1,16 +1,30 @@
 {% extends 'layout.html' %}
 
-{% block title %}
-Account
-{% endblock %}
+{% block title %}Account{% endblock %}
+{% block subtitle %}{{ user.first_name }} {{ user.last_name }}{% endblock %}
 
-{% block body %}
-  <h3>{{ user.first_name }} {{ user.last_name }}</h3>
 
-    <p>{{ user.accounts.account_no }}</p>
-    <p>{{ user.accounts.account_type }}</p>
-    <p>BDT {{ user.accounts.balance }}</p>
+{% block content %}
+  <p>Account No: <strong>{{ user.account.account_no }}</strong></p>
+  <p>Account Type: <strong>{{ user.account.account_type | upper }}</strong></p>
+  <p>Account Created: <strong>{{ user.account.activation_date }}</strong></p>
+  <p>Balance: <strong>{{ user.account.balance }}</strong></p>
 
-    <p>{{ user.address.street }}</p>
+  <br>
+
+  <div>
+    <strong>Recent Transaction</strong>
+  </div>
+
+  <br>
+
+  <address>
+    <p>From,</p>
+    <i>
+      {{ user.address.street }}
+      {{ user.address.city }}-{{ user.address.postal_code }}
+      {{ user.address.country }}
+    </i>
+  </address>
 
 {% endblock %}

@@ -1,14 +1,12 @@
-{% extends "layout.html" %}
+{% extends "form.html" %}
 
-{% block title %}
-Create Account
-{% endblock %}
+{% block title %}Create Account{% endblock %}
 
+{% block subtitle %}Account creation form{% endblock %}
 
-{% block body %}
-        <form method="POST" novalidate class="form-container">
-            {% csrf_token %}
-            
+{% block method %}POST{% endblock %} 
+
+{% block form %}
             <!-- form 1 - UserForm -->
             {% for field in UserForm %}
                 {{ field.label_tag }}
@@ -44,7 +42,4 @@ Create Account
                 <p class="message error">{{ err }}</p>
                 {% endfor %}
             {% endfor %}
-            <br>
-            <button>Submit</button>
-        </form>
 {% endblock %}

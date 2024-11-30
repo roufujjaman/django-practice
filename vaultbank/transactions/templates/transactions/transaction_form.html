@@ -1,0 +1,19 @@
+{% extends 'form.html' %}
+
+{% block title %}
+Transaction
+{% endblock %}
+
+{% block form %}
+    {% block method %}POST{% endblock %}
+    {% csrf_token %}
+    {% for field in TransactionForm %}
+        {{ field.labeltag }}
+        
+        {{ field }}
+        
+        {% for err in field.errors %}
+            <p class="message error">{{ err }} aaa</p>
+        {% endfor %}
+    {% endfor %}
+{% endblock %}

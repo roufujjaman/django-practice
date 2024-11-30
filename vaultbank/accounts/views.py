@@ -9,7 +9,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from .models import Account, Address
 
 
-@login_required(redirect_field_name="login")
+@login_required(login_url='/account/login')
 def home_account(request):
     account = Account.objects.filter(user=request.user)
     return render(request, "accounts/account_home.html", 
@@ -46,7 +46,7 @@ def create_account(request):
 
             return redirect("account")
 
-    return render(request, "accounts/account_form.html", {
+    return render(request, "accounts/form_create_account.html", {
         "UserForm": user_form,
         "AccountForm": account_form,
         "AddressForm": address_form
@@ -69,24 +69,27 @@ def edit_account(request, id):
 
 
 def login_account(request):
+    user_form = AuthenticationForm(request)
+    
     if request.method == "POST":
         user_form = AuthenticationForm(request, request.POST)
         if user_form.is_valid():
             username = user_form.cleaned_data["username"]
             password = user_form.cleaned_data["password"]
-
             user = authenticate(username=username, password=password)
+            print(username, password)
             if user is not None:
                 login(request, user)
-                print("looged in")
-                return redirect("")
+                print(user_form.errors)
+                return redirect("accounts:home")
+            
 
 
-    return render(request, "Account/authentication_form.html", {
-        "LoginForm": AuthenticationForm
+    return render(request, "accounts/form_login.html", {
+        "LoginForm": user_form
     })
 
 def logout_account(reqeust):
     logout(request=reqeust)
-    return redirect("login")
+    return redirect("accounts:login")
 

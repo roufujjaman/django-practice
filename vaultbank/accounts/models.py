@@ -14,7 +14,7 @@ GENDER_TYPE = (
 )
 
 class Account(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="accounts")
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="account")
     
     account_no = models.IntegerField(unique=True)
     account_type = models.CharField(max_length=20, choices=ACCOUNT_TYPE)
@@ -23,9 +23,13 @@ class Account(models.Model):
     activation_date = models.DateField(auto_now_add=True)
     balance = models.DecimalField(default=0, max_digits=12, decimal_places=2)
 
+    def __str__(self) -> str:
+        return f"{self.user}[{self.account_no}]"
 
     class Meta:
         verbose_name_plural = "Accounts"
+
+
 
 
 
