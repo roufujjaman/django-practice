@@ -1,11 +1,9 @@
 {% extends 'form.html' %}
 
-{% block title %}
-Transaction
-{% endblock %}
+{% block title %}Transaction{% endblock %}
+{% block method %}POST{% endblock %}
 
 {% block form %}
-    {% block method %}POST{% endblock %}
     {% csrf_token %}
     {% for field in TransactionForm %}
         {{ field.labeltag }}

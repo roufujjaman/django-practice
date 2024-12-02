@@ -77,10 +77,8 @@ def login_account(request):
             username = user_form.cleaned_data["username"]
             password = user_form.cleaned_data["password"]
             user = authenticate(username=username, password=password)
-            print(username, password)
             if user is not None:
                 login(request, user)
-                print(user_form.errors)
                 return redirect("accounts:home")
             
 
