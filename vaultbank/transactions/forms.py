@@ -1,18 +1,17 @@
-from django.forms import ModelForm, HiddenInput, ValidationError
-from .models import Transaction
+from django import forms
+from .models import Transaction, TransactionSimple
 
 
-class TransactionForm(ModelForm):
+class TransactionForm(forms.ModelForm):
     class Meta:
         model = Transaction
-        fields = ['amount', 'txn_type']
+        fields = ['amount']
 
     
     def __init__(self, *args, **kwargs):
-        self.account = kwargs.pop('account')
-        super.__init__(*args, **kwargs)
-        self.fields['tnx_type'].disabled = True
-        self.fields['tnx.type'].widget = HiddenInput()
+        # self.account = kwargs.pop("account")
+        
+        super().__init__(*args, **kwargs)
 
 
     def save(self, commit = True):
@@ -20,15 +19,34 @@ class TransactionForm(ModelForm):
         self.instance.balance_post_tnx = self.account.balance
         return super().save()
 
-class DepositForm(TransactionForm):
-    def clean_amount(self):
-        min_deposit_amount = 100
-        amount = self.cleaned_data.get('amount')
-        if amount < min_deposit_amount:
-            raise ValidationError("The amount needs to be bigget than 100")
+
+# testing 'how to pass kwargs between view and form'
+class TransactionSimpleForm(forms.ModelForm):
+    class Meta:
+        model = TransactionSimple
+        fields = ["amount"]
+    
+    def __init__(self,*args, **kwargs):
+        self.account = kwargs.pop("account", None)
+        super().__init__(*args, **kwargs)
+
+    
+    def save(self, commit = True):
+        self.instance.account = self.account
+        # self.instance.txn_type = False
+        return super().save()
+
+
+
+# class DepositForm(TransactionForm):
+#     def clean_amount(self):
+#         min_deposit_amount = 100
+#         amount = self.cleaned_data.get('amount')
+#         if amount < min_deposit_amount:
+#             raise ValidationError("The amount needs to be bigget than 100")
         
-        else:
-            return amount
+#         else:
+#             return amount
 
 # class WithdrawForm(Transaction):
 #     def clea_amount(self):

@@ -22,3 +22,8 @@ class Transaction(models.Model):
     
     class Meta:
         ordering = ["created_at"]
+
+class TransactionSimple(models.Model):
+    account = models.ForeignKey(Account, related_name="transaction", on_delete=models.CASCADE)
+    amount = models.IntegerField()
+    txn_type = models.CharField(max_length=10, null=True, blank=True)

@@ -5,8 +5,10 @@
 
 {% block form %}
     {% csrf_token %}
+    {{ TransactionForm.account_balance }}
+
     {% for field in TransactionForm %}
-        {{ field.labeltag }}
+        {{ field.label_tag }}
         
         {{ field }}
         
