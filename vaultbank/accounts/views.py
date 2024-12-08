@@ -11,7 +11,7 @@ from .models import Account, Address
 
 @login_required(login_url='/account/login')
 def home_account(request):
-    account = Account.objects.filter(user=request.user)
+    account = Account.objects.get(user=request.user)
     return render(request, "accounts/account_home.html", 
                   {"account": account})
 

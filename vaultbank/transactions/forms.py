@@ -1,63 +1,85 @@
 from django import forms
-from .models import Transaction, TransactionSimple
+from .models import Transaction
 
 
 class TransactionForm(forms.ModelForm):
     class Meta:
         model = Transaction
-        fields = ['amount']
+        fields = ["amount", "txn_type"]
 
-    
+
     def __init__(self, *args, **kwargs):
-        # self.account = kwargs.pop("account")
-        
-        super().__init__(*args, **kwargs)
-
-
-    def save(self, commit = True):
-        self.instance.account = self.account
-        self.instance.balance_post_tnx = self.account.balance
-        return super().save()
-
-
-# testing 'how to pass kwargs between view and form'
-class TransactionSimpleForm(forms.ModelForm):
-    class Meta:
-        model = TransactionSimple
-        fields = ["amount"]
-    
-    def __init__(self,*args, **kwargs):
         self.account = kwargs.pop("account", None)
         super().__init__(*args, **kwargs)
 
-    
+
+        #self.fields["field"].attributes  attributes["widget", "label", "required", "help_text", "inital"]
+        self.fields["txn_type"].disabled = True
+        self.fields["txn_type"].label = ""
+        self.fields["txn_type"].widget = forms.HiddenInput()
+
     def save(self, commit = True):
         self.instance.account = self.account
-        # self.instance.txn_type = False
+        self.instance.balance_post_txn = self.account.balance
         return super().save()
 
-
-
-# class DepositForm(TransactionForm):
-#     def clean_amount(self):
-#         min_deposit_amount = 100
-#         amount = self.cleaned_data.get('amount')
-#         if amount < min_deposit_amount:
-#             raise ValidationError("The amount needs to be bigget than 100")
+class DepositForm(TransactionForm):
+    def clean_amount(self): # fitering the amount field
+        min_amount = 500
+        amount = self.cleaned_data.get("amount")
+        if amount < min_amount:
+            raise forms.ValidationError(
+                f"Minimum amount to deposit is {min_amount} BDT"
+            )
+        return amount
+    
+class WithdrawForm(TransactionForm):
+    def clean_amount(self):
+        min_amount = 500
+        max_amount = 25_000
+        balance = self.account.balance
+        amount = self.cleaned_data.get("amount")
         
-#         else:
-#             return amount
+        if amount > balance:
+            raise forms.ValidationError(
+                f"Amount exceeds account balance"
+            )
+        
+        if amount < min_amount:
+            raise forms.ValidationError(
+                f"Minimum amount to withdraw is {min_amount} BDT"
+            )
+        elif amount > max_amount:
+            raise forms.ValidationError(
+                f"Maximum amoun to withdraw is {max_amount}"
+            )
 
-# class WithdrawForm(Transaction):
-#     def clea_amount(self):
-#         account = self.account
-#         min_withdraw_amount = 500
-#         max_withdraw_amount = 20_000
-#         balance = account.balance
-#         amount = self.clean_date.get("amount")
-#         if not(min_withdraw_amount <= amount <= max_withdraw_amount):
-#             raise ValidationError(f"The amount needs to be between {min_withdraw_amount} & {max_withdraw_amount}")
-#         elif amount < balance:
-#             raise ValidationError("Insufficient Balance")
-#         else:
-#             return amount
+        return amount
+    
+class LoanForm(TransactionForm):
+    pass
+
+class PaymentForm(TransactionForm):
+    pass
+
+# testing 'how to pass kwargs between view and form'
+# class TransactionSimpleForm(forms.ModelForm):
+#     class Meta:
+#         model = TransactionSimple
+#         fields = ["amount"]
+    
+#     def __init__(self,*args, **kwargs):
+#         self.account = kwargs.pop("account", None)
+#         super().__init__(*args, **kwargs)
+
+
+#     def clean_amount(self):
+#         print("came here to clean amount")
+#         return self.cleaned_data["amount"]
+    
+
+#     def save(self, commit = True):
+#         self.instance.account = self.account
+#         self.account.balance += self.cleaned_data["amount"]
+#         self.account.save()
+#         return super().save()
