@@ -17,9 +17,13 @@
             margin: 0;
             box-sizing: border-box;
         }
+
+
         a {
             text-decoration: none;
         }
+
+
         a:visited {
             color: inherit;
         }
@@ -52,19 +56,30 @@
             /* overflow-x: none; */
         }
 
-        .menu > ul {
-            list-style: none;
+        a:hover {
+            color: blue;
+        }
+
+        .menu {
             display: flex;
             gap: 1rem;
         }
 
-        .menu > ul > li {
-            font-weight: 900;
+        .inner{       
+            position: absolute;
+            display: none;
         }
 
-        .menu > ul > li:hover {
-            color: blue;
-            cursor: pointer;
+        .inner > a {
+            display: block;
+            padding-top: .5rem;
+        }
+        .outer:hover .inner {
+            display: block;
+        }
+
+        .menu > *a{
+            background-color: aqua;
         }
 
     </style>
@@ -74,11 +89,20 @@
         <nav class="nav">
                 <img src="{% static 'logo.png' %}" style="max-height: 2rem;" alt="">
                 <div class="menu">
-                    <ul>
-                        <li><a href="{% url 'accounts:home' %}">Profile</a></li>
-                        <li>Services</li>
-                        <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
-                    </ul>
+                    <a href="{% url 'accounts:home' %}">Account</a>
+                    {% if user.is_authenticated %}
+                        <div class="outer">
+                            <a href="#" class="trigger">Services</a>
+                            <div class="inner">
+                                <a href="{% url 'transactions:withdraw' %}">Withdraw</a>
+                                <a href="{% url 'transactions:deposit' %}">Deposit</a>
+                                <a href="">Loan</a>
+                            </div>
+                        </div>
+                        <a href="{% url 'accounts:logout' %}">Logout</a>
+                    {% else %}
+                        <a href="{% url 'accounts:login' %}">Login</a>
+                    {% endif %}
                 </div>
         </nav>
         <div>

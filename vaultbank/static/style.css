@@ -21,10 +21,6 @@
   animation: kf-error 200ms forwards;
 }
 
-
-
-
-
 .form-container {
   display: flex;
   flex-direction: column;
@@ -36,8 +32,6 @@ input, select {
   padding: .5rem;
   margin: .5rem 0;
 }
-
-
 
 button {
   margin: 1rem 0rem;

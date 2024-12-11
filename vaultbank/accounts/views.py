@@ -5,6 +5,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
+from django.views.generic import ListView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from transactions.models import Transaction
 
 from .models import Account, Address
 
@@ -14,6 +17,22 @@ def home_account(request):
     account = Account.objects.get(user=request.user)
     return render(request, "accounts/account_home.html", 
                   {"account": account})
+
+class AccountView(LoginRequiredMixin, ListView):
+    model = Transaction
+    template_name = "accounts/account_home.html"
+    context_object_name = "transactions"
+
+    def get_queryset(self):
+        queryset = super().get_queryset().filter(
+            account = self.request.user.account
+        )
+        
+        start_date_str = self.request.GET.get('start_date')
+        end_date_str = self.request.GET.get('end_date')
+
+        print(start_date_str, end_date_str)
+        return queryset
 
 def create_account(request):
     user_form = UserForm()

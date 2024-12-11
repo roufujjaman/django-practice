@@ -28,7 +28,11 @@ def transaction(request):
                    "subtitle": "Deposit"})
             
 
-class Transaction(CreateView, LoginRequiredMixin):
+
+
+
+class Transaction(LoginRequiredMixin, CreateView):
+    login_url = "/account/login"
     model = Transaction
     template_name = 'transactions/transaction_form.html'
     success_url = '/account'
@@ -42,10 +46,37 @@ class Transaction(CreateView, LoginRequiredMixin):
             )
         return kwargs
 
+
+def test(request):
+    return render(request,'transactions/transaction_form.html' )
+
+
+
+class Test(Transaction):
+    form_class= forms.TestForm
+    title = "Test"
+    initial = {"txn_type": 3}
+
+    def form_valid(self, form):
+
+
+        print(form.instance.amount)
+        print(form.instance.txn_type)
+        print(form.instance.created_at)
+        print(form.instance.approval)
+        print(form.instance.account)
+        
+
+    
+        return super().form_valid(form)
+
+
 class DepositView(Transaction):
     form_class = forms.DepositForm
     title =  "Deposit"
     initial = {"txn_type": 1}
+    
+    
     extra_context = {
         "subtitle": "Deposit",
     }
@@ -54,29 +85,31 @@ class DepositView(Transaction):
         amount = form.cleaned_data["amount"]
         account = self.request.user.account
         account.balance += amount
+
         account.save(
             update_fields = ["balance"]
         )
 
         return super().form_valid(form)
 
+class WithdrawView(Transaction):
+    form_class = forms.WithdrawForm
+    initial = {"txn_type": 2}
+    extra_context = {
+        "subtitle": "Withdraw"
+    }
+
+    def form_valid(self, form):
+        amount = form.cleaned_data["amount"]
+        account = self.request.user.account
+        account.balance -= amount
+
+        account.save(
+            update_fields=["balance"]
+        )
+
+        return super().form_valid(form)
 
 
-
-# class Deposit(Transaction):
-#     form_class = DepositForm
-#     title = "Deposit"
-
-#     def get_inital(self):
-#         DEPOSIT = TRANSACTION_TYPE[0][0]
-#         initial = {"tnx_type": DEPOSIT}
-#         return initial
-    
-#     def form_valid(self, form):
-#         amount = form.cleaned_data.get('amount')
-#         acount = self.request.user.acount
-#         acount.balance += amount
-#         acount.save(update_fields=['balance'])
-#         messages.success(self.request, "DIPOSIT SUCCESSFULL")
-
-#         return super().form_valid(form)
+class LoanView(Transaction):
+    pass 

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'users',
     'singlepage',
     'projects',
+    'instances.apps.InstancesConfig'
 ]
 
 MIDDLEWARE = [

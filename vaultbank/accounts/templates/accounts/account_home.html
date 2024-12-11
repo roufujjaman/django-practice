@@ -12,9 +12,17 @@
 
   <br>
 
-  <div>
-    <strong>Recent Transaction</strong>
-  </div>
+  <strong>Transaction History</strong>
+    <div style="height: 20rem; overflow-y: scroll;">
+      {% for i in transactions %}
+      <p>{{ i }}</p>
+      {% endfor %}
+    </div>
+  <form action="" method="GET">
+    <input type="date" name="start_date">
+    <input type="date" name="end_date">
+    <button>Filer</button>
+  </form>
 
   <br>
 

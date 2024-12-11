@@ -17,7 +17,7 @@ class Transaction(models.Model):
     approval = models.BooleanField(default=False)
 
     def __str__(self):
-        return "example"
+        return f"{self.amount}[{self.txn_type}]"
     
     
     class Meta:

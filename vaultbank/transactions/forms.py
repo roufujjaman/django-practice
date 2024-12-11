@@ -56,11 +56,24 @@ class WithdrawForm(TransactionForm):
 
         return amount
     
+class TestForm(TransactionForm):
+    def clean_amount(self):
+        print(self.instance.amount)
+        amount = self.cleaned_data["amount"]
+        if amount != 999:
+            raise forms.ValidationError(
+                "amount needs to be exactly 999"
+            )
+        return amount
+
 class LoanForm(TransactionForm):
     pass
-
 class PaymentForm(TransactionForm):
     pass
+
+
+
+
 
 # testing 'how to pass kwargs between view and form'
 # class TransactionSimpleForm(forms.ModelForm):
