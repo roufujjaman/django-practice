@@ -2,7 +2,7 @@ from django.db import models
 from accounts.models import Account
 
 TRANSACTION_TYPE = (
-    (1, 'Deposite'),
+    (1, 'Deposit'),
     (2, 'Withdrawal'),
     (3, 'Loan'),
     (4, 'Payment')
@@ -22,3 +22,8 @@ class Transaction(models.Model):
     
     class Meta:
         ordering = ["created_at"]
+    
+
+
+class Loan(models.Model):
+    pass

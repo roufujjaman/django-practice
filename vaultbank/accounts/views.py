@@ -9,6 +9,8 @@ from django.views.generic import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from transactions.models import Transaction
 
+from datetime import datetime
+
 from .models import Account, Address
 
 
@@ -26,12 +28,28 @@ class AccountView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         queryset = super().get_queryset().filter(
             account = self.request.user.account
-        )
-        
+        ).order_by("-created_at")
+
         start_date_str = self.request.GET.get('start_date')
         end_date_str = self.request.GET.get('end_date')
 
-        print(start_date_str, end_date_str)
+        if start_date_str and end_date_str:
+            start_date = datetime.strptime(start_date_str, "%Y-%m-%d").date()
+            end_date = datetime.strptime(end_date_str, "%Y-%m-%d").date()
+
+            queryset = queryset.filter(
+                created_at__date__gte = start_date,
+                created_at__date__lte = end_date
+            )
+
+        try:
+            list_length = int(self.request.GET.get('list_length', 10))
+        except ValueError:
+            list_length = 10
+        else:
+            if not list_length <= 100:
+                list_length = 10
+
         return queryset
 
 def create_account(request):

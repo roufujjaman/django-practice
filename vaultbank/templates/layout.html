@@ -72,7 +72,9 @@
 
         .inner > a {
             display: block;
-            padding-top: .5rem;
+            background-color: white;
+            box-shadow: 1px 1px 2px rgb(202, 202, 202);
+            padding: .5rem;
         }
         .outer:hover .inner {
             display: block;
@@ -96,7 +98,8 @@
                             <div class="inner">
                                 <a href="{% url 'transactions:withdraw' %}">Withdraw</a>
                                 <a href="{% url 'transactions:deposit' %}">Deposit</a>
-                                <a href="">Loan</a>
+                                <a href="{% url 'transactions:loan' %}">Loan</a>
+                                <a href="">Payment</a>
                             </div>
                         </div>
                         <a href="{% url 'accounts:logout' %}">Logout</a>

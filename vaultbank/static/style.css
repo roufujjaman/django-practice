@@ -34,10 +34,55 @@ input, select {
 }
 
 button {
-  margin: 1rem 0rem;
   background-color: blue;
   color: white;
   font-size: 1rem;
   padding: 0.75rem;
   border: none;
+}
+
+
+
+table {
+  width: 100%;
+}
+
+td {
+  border-bottom: 1px solid grey;
+  min-height: 2rem;
+}
+
+th {
+  padding: 0.25rem;
+}
+
+.txn-heading {
+  background-color: blue;
+  color: white;
+  position:sticky;
+  top: 0;
+  text-align: left;
+}
+
+
+
+.txn-type {
+  display: flex;
+  align-items: center;
+  gap: .25rem;
+}
+
+.txn {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: .25rem;
+}
+.deposit {
+  background-color: blue;
+}
+.withdraw {
+  background-color: rgb(0, 233, 0);
+}
+.other {
+  background-color: rgb(167, 167, 255);
 }

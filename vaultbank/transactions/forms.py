@@ -5,7 +5,7 @@ from .models import Transaction
 class TransactionForm(forms.ModelForm):
     class Meta:
         model = Transaction
-        fields = ["amount", "txn_type"]
+        fields = ["amount", "txn_type", "approval"]
 
 
     def __init__(self, *args, **kwargs):
@@ -17,6 +17,11 @@ class TransactionForm(forms.ModelForm):
         self.fields["txn_type"].disabled = True
         self.fields["txn_type"].label = ""
         self.fields["txn_type"].widget = forms.HiddenInput()
+
+        self.fields["approval"].disabled = True
+        self.fields["approval"].label = ""
+        self.fields["approval"].widget = forms.HiddenInput()
+
 
     def save(self, commit = True):
         self.instance.account = self.account
@@ -67,7 +72,17 @@ class TestForm(TransactionForm):
         return amount
 
 class LoanForm(TransactionForm):
-    pass
+    def clean_amount(self):
+        max_amount = self.account.balance * 2
+        amount = self.cleaned_data["amount"]
+        if amount > max_amount:
+            raise forms.ValidationError(
+                "Loan amount can be maximum of 2X of your current balance"
+            )
+
+        return amount
+
+
 class PaymentForm(TransactionForm):
     pass
 

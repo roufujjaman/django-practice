@@ -4,7 +4,7 @@ from django.views.generic import CreateView, View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Transaction, TRANSACTION_TYPE
 from . import forms
-from django.contrib import messages
+from django.views.generic import ListView
 
 
 def transaction(request):
@@ -31,7 +31,7 @@ def transaction(request):
 
 
 
-class Transaction(LoginRequiredMixin, CreateView):
+class TransactionView(LoginRequiredMixin, CreateView):
     login_url = "/account/login"
     model = Transaction
     template_name = 'transactions/transaction_form.html'
@@ -46,35 +46,10 @@ class Transaction(LoginRequiredMixin, CreateView):
             )
         return kwargs
 
-
-def test(request):
-    return render(request,'transactions/transaction_form.html' )
-
-
-
-class Test(Transaction):
-    form_class= forms.TestForm
-    title = "Test"
-    initial = {"txn_type": 3}
-
-    def form_valid(self, form):
-
-
-        print(form.instance.amount)
-        print(form.instance.txn_type)
-        print(form.instance.created_at)
-        print(form.instance.approval)
-        print(form.instance.account)
-        
-
-    
-        return super().form_valid(form)
-
-
-class DepositView(Transaction):
+class DepositView(TransactionView):
     form_class = forms.DepositForm
     title =  "Deposit"
-    initial = {"txn_type": 1}
+    initial = {"txn_type": 1, "approval": True}
     
     
     extra_context = {
@@ -92,9 +67,9 @@ class DepositView(Transaction):
 
         return super().form_valid(form)
 
-class WithdrawView(Transaction):
+class WithdrawView(TransactionView):
     form_class = forms.WithdrawForm
-    initial = {"txn_type": 2}
+    initial = {"txn_type": 2, "approval": True}
     extra_context = {
         "subtitle": "Withdraw"
     }
@@ -111,5 +86,37 @@ class WithdrawView(Transaction):
         return super().form_valid(form)
 
 
-class LoanView(Transaction):
-    pass 
+class LoanRequestView(TransactionView):
+    form_class = forms.LoanForm
+    initial = {"txn_type": 3}
+    extra_context = {
+        "subtitle": "Loan Request"
+    }
+
+    def form_valid(self, form):
+        amount = form.cleaned_data["amount"]
+        account = self.request.user.account
+        account.balance += amount
+
+        account.save(
+            update_fields=["balance"]
+        )
+
+        return super().form_valid(form)
+    
+class LoansView(LoginRequiredMixin, ListView):
+    model = Transaction
+    template_name = "transactions\loan_list.html"
+    context_object_name = "loanlist"
+
+    def get_queryset(self):
+        queryset = super().get_queryset().filter(
+            account= self.request.user.account,
+            txn_type=3
+        ).order_by("-created_at")
+
+        pay_id = self.request.GET.get("id")
+
+        print(pay_id)
+
+        return queryset

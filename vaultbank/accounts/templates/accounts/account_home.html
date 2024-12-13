@@ -13,14 +13,50 @@
   <br>
 
   <strong>Transaction History</strong>
+    <br>
     <div style="height: 20rem; overflow-y: scroll;">
-      {% for i in transactions %}
-      <p>{{ i }}</p>
-      {% endfor %}
+      <table>
+        <tr class="txn-heading">
+          <th>Type</th>
+          <th>Date</th>
+          <th>Amount</th>
+          <th>Balance</th>
+        </tr>
+        {% for t in transactions %}
+            <tr>
+              <!-- (1, 'Deposite'),
+                          (2, 'Withdrawal'),
+                          (3, 'Loan'),
+                          (4, 'Payment') -->
+              {% if t.txn_type == 1 %}
+              <td class="txn-type">
+                <div class="txn deposit"></div>Deposit
+              </td>
+              {% elif t.txn_type == 2 %}
+              <td class="txn-type">
+                <div class="txn withdraw"></div>Withdraw
+              </td>
+              {% elif t.txn_type == 3 %}
+              <td class="txn-type">
+                <div class="txn other"></div>Loan
+              </td>
+              {% elif t.txn_type == 4 %}
+              <td class="txn-type">
+                <div class="txn other"></div>Payment
+              </td>
+              {% endif %}
+              <td>{{ t.created_at | date:"Y F d, fA"}}</td>
+              <td>৳ {{ t.amount }}</td>
+              <td>৳ {{ t.balance_post_txn }}</td>
+            </tr>
+        {% endfor %}
+      </table>
     </div>
-  <form action="" method="GET">
+  <form action="" method="GET" class="txn-filter">
     <input type="date" name="start_date">
+    <p style="display: inline-block;">TO</p>
     <input type="date" name="end_date">
+    <input type="number" name="list_length" placeholder="# of Transactions">
     <button>Filer</button>
   </form>
 
