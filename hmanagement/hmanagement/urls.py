@@ -1,5 +1,5 @@
 """
-URL configuration for vaultbank project.
+URL configuration for hmanagement project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.0/topics/http/urls/
@@ -15,15 +15,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
-from django.shortcuts import HttpResponseRedirect, HttpResponse
-
-def redirect_account(request):
-    return HttpResponseRedirect("/account")
+from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', redirect_account),
-    path('account/', include("accounts.urls"), name="account"),
-    path('transaction/', include("transactions.urls"), name="transactions")
 ]
+
+
+urlpatterns += static(settings.MEDIA_URL)

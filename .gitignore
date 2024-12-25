@@ -6,3 +6,5 @@ unsorted
 *.jpg
 *.jpeg
 *.png
+*.env
+script.py

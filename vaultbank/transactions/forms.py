@@ -1,6 +1,7 @@
 from django import forms
 from .models import Transaction
-
+from accounts.models import Account
+from django.core.exceptions import ObjectDoesNotExist
 
 class TransactionForm(forms.ModelForm):
     class Meta:
@@ -61,15 +62,15 @@ class WithdrawForm(TransactionForm):
 
         return amount
     
-class TestForm(TransactionForm):
-    def clean_amount(self):
-        print(self.instance.amount)
-        amount = self.cleaned_data["amount"]
-        if amount != 999:
-            raise forms.ValidationError(
-                "amount needs to be exactly 999"
-            )
-        return amount
+# class TestForm(TransactionForm):
+#     def clean_amount(self):
+#         print(self.instance.amount)
+#         amount = self.cleaned_data["amount"]
+#         if amount != 999:
+#             raise forms.ValidationError(
+#                 "amount needs to be exactly 999"
+#             )
+#         return amount
 
 class LoanForm(TransactionForm):
     def clean_amount(self):
@@ -83,31 +84,29 @@ class LoanForm(TransactionForm):
         return amount
 
 
-class PaymentForm(TransactionForm):
-    pass
+class TransferForm(TransactionForm):
+    to_account_no = forms.IntegerField()
+    to_account_obj = None
 
-
-
-
-
-# testing 'how to pass kwargs between view and form'
-# class TransactionSimpleForm(forms.ModelForm):
-#     class Meta:
-#         model = TransactionSimple
-#         fields = ["amount"]
+    def clean_amount(self):
+        max_amount = self.account.balance
+        amount = self.cleaned_data["amount"]
+        if amount > max_amount:
+            raise forms.ValidationError(
+                "Insufficient Balance"
+            )
+        return amount
     
-#     def __init__(self,*args, **kwargs):
-#         self.account = kwargs.pop("account", None)
-#         super().__init__(*args, **kwargs)
+    def clean_to_account_no(self):
+        account_no = self.cleaned_data["to_account_no"]
 
+        try:
+            account = Account.objects.get(account_no=account_no)
+        except ObjectDoesNotExist:
+            raise forms.ValidationError(
+                "Could not find the account"
+            )
+        else:
+            self.to_account_obj = account
 
-#     def clean_amount(self):
-#         print("came here to clean amount")
-#         return self.cleaned_data["amount"]
-    
-
-#     def save(self, commit = True):
-#         self.instance.account = self.account
-#         self.account.balance += self.cleaned_data["amount"]
-#         self.account.save()
-#         return super().save()
+        return account_no

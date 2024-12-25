@@ -5,7 +5,9 @@ TRANSACTION_TYPE = (
     (1, 'Deposit'),
     (2, 'Withdrawal'),
     (3, 'Loan'),
-    (4, 'Payment')
+    (4, 'Payment'),
+    (5, 'Received'),
+    (6, 'Sent')
 )
 
 class Transaction(models.Model):
@@ -25,5 +27,7 @@ class Transaction(models.Model):
     
 
 
-class Loan(models.Model):
-    pass
+# class Loan(models.Model):
+#     account = models.ForeignKey(Account, related_name="loan", on_delete=models.CASCADE)
+#     amount = models.DecimalField(decimal_places=2, max_digits=12, default=0.00)
+    

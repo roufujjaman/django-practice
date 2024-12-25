@@ -17,6 +17,10 @@
             margin: 0;
             box-sizing: border-box;
         }
+        
+        body::-webkit-scrollbar {
+            display: none;
+        }
 
 
         a {
@@ -91,19 +95,22 @@
         <nav class="nav">
                 <img src="{% static 'logo.png' %}" style="max-height: 2rem;" alt="">
                 <div class="menu">
-                    <a href="{% url 'accounts:home' %}">Account</a>
                     {% if user.is_authenticated %}
-                        <div class="outer">
-                            <a href="#" class="trigger">Services</a>
-                            <div class="inner">
-                                <a href="{% url 'transactions:withdraw' %}">Withdraw</a>
-                                <a href="{% url 'transactions:deposit' %}">Deposit</a>
-                                <a href="{% url 'transactions:loan' %}">Loan</a>
-                                <a href="">Payment</a>
-                            </div>
+                    <a href="{% url 'accounts:home' %}">Account</a>
+                    <div class="outer">
+                        <a href="#" class="trigger">Services</a>
+                        <div class="inner">
+                            <a href="{% url 'transactions:withdraw' %}">Withdraw</a>
+                            <a href="{% url 'transactions:deposit' %}">Deposit</a>
+                            <a href="{% url 'transactions:loan' %}">Loan</a>
+                            <a href="#">Payment</a>
+                            <a href="{% url 'transactions:transfer' %}">Transfer</a>
                         </div>
-                        <a href="{% url 'accounts:logout' %}">Logout</a>
+                    </div>
+                    <a href="{% url 'accounts:logout' %}">Logout</a>
                     {% else %}
+
+                        <a href="{% url 'accounts:create' %}">Create Account</a>
                         <a href="{% url 'accounts:login' %}">Login</a>
                     {% endif %}
                 </div>
@@ -113,6 +120,30 @@
             <p>{% block subtitle %}{% endblock %}</p>
             <hr style="border: 1px solid blue; margin: 1rem 0rem;">
         </div>
+
+
+        {% if messages %}
+        <div class="toast-wrapper">
+                {% for m in messages %}
+                <div class="toast">
+                    <p>{{ m }}</p>
+                </div>
+                {% endfor %}
+        </div>
+        {% endif %}
+        
+        <script>
+            toast = document.querySelector(".toast-wrapper")
+
+            console.log(toast);
+            toast.addEventListener("animationend", () => {
+                setTimeout(() => {
+                    toast.style.display = "none";
+                }, 3000)
+            })
+        </script>
+
+
         <div class="content">
             {% block content %}
             {% endblock %}

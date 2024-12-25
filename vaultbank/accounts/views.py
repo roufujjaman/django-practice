@@ -13,42 +13,54 @@ from datetime import datetime
 
 from .models import Account, Address
 
-
-@login_required(login_url='/account/login')
-def home_account(request):
-    account = Account.objects.get(user=request.user)
-    return render(request, "accounts/account_home.html", 
-                  {"account": account})
-
 class AccountView(LoginRequiredMixin, ListView):
     model = Transaction
     template_name = "accounts/account_home.html"
     context_object_name = "transactions"
+    login_url = "/account/login"
 
     def get_queryset(self):
         queryset = super().get_queryset().filter(
             account = self.request.user.account
         ).order_by("-created_at")
 
+        query = {}
+
         start_date_str = self.request.GET.get('start_date')
         end_date_str = self.request.GET.get('end_date')
-
+        
         if start_date_str and end_date_str:
             start_date = datetime.strptime(start_date_str, "%Y-%m-%d").date()
             end_date = datetime.strptime(end_date_str, "%Y-%m-%d").date()
 
-            queryset = queryset.filter(
+            query.update(
                 created_at__date__gte = start_date,
                 created_at__date__lte = end_date
             )
 
         try:
-            list_length = int(self.request.GET.get('list_length', 10))
+            list_length = int(self.request.GET.get('list_length', 25))
         except ValueError:
-            list_length = 10
+            list_length = 25
         else:
             if not list_length <= 100:
-                list_length = 10
+                list_length = 25
+
+        txn_type = self.request.GET.get("txn_type")
+
+        
+        if txn_type:
+            if txn_type == "loan-pending":
+                query.update(
+                    txn_type = 3,
+                    approval = False
+                )
+                queryset = queryset.filter(**query)
+        elif list_length:
+            query.update(
+                approval = True
+            )
+            queryset = queryset.filter(**query)[:list_length]
 
         return queryset
 
@@ -92,14 +104,14 @@ def create_account(request):
 
 def edit_account(request, id):
 
-    user_form = UserForm(instance=User.objects.get(pk=id))
+    # user_form = UserForm(instance=User.objects.get(pk=id))
     Account_form = AccountForm(instance=Account.objects.get(pk=id))
-    address_form = AddressForm(instance=Address.objects.get(pk=id))
+    # address_form = AddressForm(instance=Address.objects.get(pk=id))
     
-    return render(request, "Account/Account_form.html", {
-        "UserForm": user_form,
+    return render(request, "accounts/form_create_account.html", {
+        # "UserForm": user_form,
         "AccountForm": Account_form,
-        "AddressForm": address_form
+        # "AddressForm": address_form
     })
 
 
