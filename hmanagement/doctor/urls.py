@@ -6,8 +6,8 @@ router = DefaultRouter()
 
 router.register("list", views.DoctorViewset)
 router.register("specialization", views.SpecializationViewset)
-router.register("available_time", views.DesignationViewset)
-router.register("designation", views.AvailableTimeViewset)
+router.register("available_time", views.AvailableTimeViewset)
+router.register("designation", views.DesignationViewset)
 router.register("review", views.ReviewViewset)
 
 urlpatterns = [

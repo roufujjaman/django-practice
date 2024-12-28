@@ -3,6 +3,7 @@ from .models import Doctor, Specialization, Designation, AvailableTime, Review
 
 
 class DoctorSerializer(serializers.ModelSerializer):
+    designation = serializers.StringRelatedField(many=True)
     class Meta:
         model = Doctor
         fields = "__all__"

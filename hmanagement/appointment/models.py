@@ -14,13 +14,13 @@ APOINTMENT_TYPES = (
     ("ON", "Online")
 )
 
-class Apointment(models.Model):
+class Appointment(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     apointment_types = models.CharField(choices=APOINTMENT_TYPES, max_length=2)
     apointment_status = models.CharField(choices=APOINTMENT_STATUS, max_length=2, default="PN")
     symptoms = models.TextField()
-    time = models.OneToOneField(AvailableTime, on_delete=models.CASCADE)
+    time = models.ForeignKey(AvailableTime, on_delete=models.CASCADE)
     cancel = models.BooleanField(default=False)
 
     def __str__(self):
