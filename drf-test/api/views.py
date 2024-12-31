@@ -4,6 +4,10 @@ from rest_framework import permissions, viewsets
 from api.serializer import GroupSerializer, UserSerializer
 # Create your views here.
 
+
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+
 class UserViewSet(viewsets.ModelViewSet):
 
     queryset = User.objects.all().order_by("-date_joined")
@@ -19,3 +23,8 @@ class GroupViewSet(viewsets.ModelViewSet):
     permission_classes = [
         permissions.IsAuthenticated
     ]
+
+@api_view(["GET"])
+def test(request):
+    data = {"name": "roufujjaman"}
+    return Response(data)

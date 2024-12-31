@@ -1,4 +1,7 @@
 from django.urls import path, include
-from rest_framework import routers
+from snippets import views
 
-router = routers.DefaultRouter()
+urlpatterns = [
+    path("", views.snippet_list),
+    path("<int:pk>/", views.snippet_detail)
+]
