@@ -3,9 +3,10 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from snippets.models import Snippet
 from snippets.serializers import SnippetSerializer
+from rest_framework.decorators import api_view
 
-@csrf_exempt
-def snippet_list(request):
+@api_view(["GET", "POST"])
+def snippet_list(request, format=None):
     if request.method == "GET":
         snippets = Snippet.objects.all()
         serializer = SnippetSerializer(snippets, many=True)
@@ -19,8 +20,8 @@ def snippet_list(request):
             return JsonResponse(serializer.data, status=201)
         return JsonResponse(serializer.error, status=400)
     
-@csrf_exempt
-def snippet_detail(request, pk):
+@api_view(["GET", "PUT", "DELETE"])
+def snippet_detail(request, pk, format=None):
     print(pk)
     try:
         snippet = Snippet.objects.get(pk=pk)
@@ -42,3 +43,4 @@ def snippet_detail(request, pk):
     elif request.method == "DELETE":
         snippet.delete()
         return HttpResponse(status=204)
+    
